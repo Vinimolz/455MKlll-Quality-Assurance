@@ -100,9 +100,11 @@ input:focus{
 .member{
     font-size: 0.8rem;
     margin-top: 1.4rem;
-    color:#636363
+    color:#636363;
+    font-weight: bold;
 }
 .member a{
     color: rgb(17, 107, 143);
     text-decoration: none;
+    font-weight: bold;
 }
