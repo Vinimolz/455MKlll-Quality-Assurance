@@ -171,7 +171,7 @@ def create_app():
     def recoverpasswd():
         return render_template("recoverpasswd.html")
 
-    @app.route('ContactUs')
+    @app.route('/ContactUs')
     def contact():
         return render_template("aboutUs.html")    
     return app
