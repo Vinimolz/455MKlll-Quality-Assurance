@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Volition</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/landpage.css')}}" />
+  </head>
+  <body>
+    <main>
+      <div class="big-wrapper light">
+        <img src="{{ url_for('static', filename='images/shape.png')}}" alt="" class="shape" />
+
+        <header>
+          <div class="container">
+            <div class="logo">
+              
+              <h3>Volition <span id="blueLogo">VL</span></h3>
+            </div>
+
+            <div class="links">
+              <ul>
+                <li><a href="/ecommerce">Shop now</a></li>
+                <li><a href="/aboutUs">About us</a></li>
+                <li><a href="/testimonials">Testimonials</a></li>
+                <li><a href="/signup" class="btn">Sign up</a></li>
+              </ul>
+            </div>
+
+            <div class="overlay"></div>
+
+            <div class="hamburger-menu">
+              <div class="bar"></div>
+            </div>
+          </div>
+        </header>
+
+        <div class="showcase-area">
+          <div class="container">
+            <div class="left">
+              <div class="big-title">
+                <h1>Your future pair is here,</h1>
+                <h1>Start Exploring now!</h1>
+              </div>
+              <p class="text">
+                Why should you never buy shoes from a drug dealer? 
+                You don’t know what he laces the shoes with, 
+                I don’t want to be tripping on those shoes.
+              </p>
+              <div class="cta">
+                <a href="/login" class="btn">Get started</a>
+              </div>
+            </div>
+
+            <div class="right">
+              <img src="{{ url_for('static', filename='images/volitionLogo.png')}}" alt="Person Image" class="person" />
+            </div>
+          </div>
+        </div>
+
+        <div class="bottom-area">
+          <div class="container">
+            <button class="toggle-btn">
+              <i class="far fa-moon"></i>
+              <i class="far fa-sun"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- JavaScript Files -->
+
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    <script src="{{url_for('static', filename='js/landpage.js')}}"></script>
+  </body>
+</html>
