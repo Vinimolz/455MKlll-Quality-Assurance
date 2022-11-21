@@ -45,20 +45,16 @@ def create_app():
     def signup():    
 
         if request.method == "POST":    
-            ifirstname = request.form.get("ifirstname")
-            ilastname = request.form.get("ilastname")
-            iemail = request.form.get("iemail")
-            iusername = request.form.get("iusername")
-            ipassword = request.form.get("ipassword")
-            iconfirmpassword = request.form.get("iconfirmpassword")
+            ifirstname = request.form.get("firstName")
+            ilastname = request.form.get("lastName")
+            iemail = request.form.get("email")
+            ipassword = request.form.get("password")
+            iconfirmpassword = request.form.get("confirmPassword")
 
             cursor = mysql.connection.cursor()
 
-            cursor.execute('SELECT * FROM Users WHERE Email = % s', (iemail, ))
+            cursor.execute('SELECT * FROM Customer WHERE email = % s', (iemail, ))
             email_exists = cursor.fetchone()
-
-            cursor.execute('SELECT * FROM Users WHERE UserName = % s', (iusername, ))
-            iusername_exists = cursor.fetchone()
 
             if email_exists:
                 flash('Email already in use', category='error')
@@ -66,26 +62,18 @@ def create_app():
             elif not re.match(r'[^@]+@[^@]+\.[^@]+', iemail):
                 flash('Not a valid email', category='error')
                 print("invalid email")
-            elif iusername_exists:
-                flash('username already in user', category='error')
-                print("username exists")
-            elif not re.match(r'[A-Za-z0-9]+', iusername):
-                flash('username should only contain letters and numbers', category='error')
-                print("invalid username")
             elif ipassword != iconfirmpassword:
                 flash('Make sure passwords match', category='error')
                 print("passwords dont match")
-            else:
-                
+            else:                
                 ipassword = sha256_crypt.encrypt(ipassword)
                 print('----------------------PASSWORD STORED-------------------------------------')
                 print(ipassword)
-                cursor.execute('INSERT INTO Users VALUES (NULL, % s, % s, % s, % s, % s, NULL)', (
-                    iusername, 
-                    iemail, 
-                    ipassword, 
+                cursor.execute('INSERT INTO Customer VALUES (NULL, % s, % s, % s, % s)', ( 
                     ifirstname, 
-                    ilastname))
+                    ilastname,
+                    iemail, 
+                    ipassword))
 
                 mysql.connection.commit()
                 flash('user created sucessfully')
