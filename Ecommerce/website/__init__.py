@@ -18,6 +18,7 @@ def create_app():
 
     mysql = MySQL(app)
 
+    # -------------------------------------> Login Requeriment function <--------------------------------------
     # If we ever need a function that only allow users to access a certain page if they are logged in 
     def login_required(f):
         @wraps(f)
@@ -29,6 +30,7 @@ def create_app():
                 return redirect(url_for('login'))
         return wrap
 
+    #---------------------------------------> Logout Function <------------------------------------------------
     # Function for a future logout button that can only be accessed if user is logged in 
     @app.route("/logout")
     @login_required
