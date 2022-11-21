@@ -87,19 +87,19 @@ def create_app():
     @app.route("/login", methods=['GET', 'POST'])
     def login():
         if request.method == 'POST':
-            username = request.form.get("username")
+            email = request.form.get("email")
             password = request.form.get("password")
 
             cursor = mysql.connection.cursor()
 
-            cursor.execute('SELECT * FROM Users WHERE UserName = % s', (username, ))
+            cursor.execute('SELECT * FROM Customer WHERE email = % s', (email, ))
             account_info = cursor.fetchone() 
 
             print(account_info)           
 
             if account_info:
                 
-                cursor.execute('SELECT Passcode FROM Users WHERE UserName = % s', (username, ) )
+                cursor.execute('SELECT UserPW FROM Customer WHERE email = % s', (email, ) )
                 db_password = cursor.fetchone()                
 
                 print(password)
@@ -111,11 +111,11 @@ def create_app():
 
                     session['loggedin'] = True
                     session['id'] = account_info[0]
-                    session['username'] = account_info[4]
+                    session['firstName'] = account_info[1]
                     
                     flash('You are logged in!')
                     print('Loggin sucessful')
-                    return redirect(url_for('dashboard'))
+                    return redirect(url_for('ecommerce'))
 
                 else:
                     flash('Incorrect password', category='error')
