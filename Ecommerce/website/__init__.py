@@ -30,14 +30,6 @@ def create_app():
                 return redirect(url_for('login'))
         return wrap
 
-    #---------------------------------------> Logout Function <------------------------------------------------
-    # Function for a future logout button that can only be accessed if user is logged in 
-    @app.route("/logout")
-    @login_required
-    def logout():
-        session.clear()
-        flash("You have been logged out", category='success')
-        return redirect(url_for('login'))
 
     #----------------------------------------> Signup function <----------------------------------------------
 
@@ -126,21 +118,33 @@ def create_app():
 
         return render_template("login.html")
     
-    #-------------------------------- This will be our future ecommerce main page ----------------------------
+    #---------------------------------------> Logout Function <------------------------------------------------
+    # Function for a future logout button that can only be accessed if user is logged in 
+    @app.route("/logout")
+    #@login_required
+    def logout():
+        if session["loggedin"] == True:
+            session.clear()
+            flash("You have been logged out", category='success')
+            return redirect(url_for('login'))
+        else:
+            return redirect(url_for('login'))
 
+    #-------------------------------- This will be our future ecommerce main page ----------------------------
     @app.route('/ecommerce')
     def ecommerce():
-        return render_template("ecommerce.html")
-
-    @app.route('/dashboard', methods=['GET', 'POST'])
-    @login_required
-    def dashboard():
         try:
-            user_id = session['id']
-            username = session['username']
-            return render_template("dashboard.html", username = session['username'])
+            try:
+                return render_template("ecommerce.html", 
+                    username = session['firstName'], 
+                    user_id = session['id'])
+            except:
+                session["loggedin"] = False
+                return render_template("ecommerce.html", 
+                    username = "Store Guest",
+                    user_id = -1)
         except:
-            flash("Login required", category='error')
+            flash("Something went wrong :'(", category='error')
             return redirect(url_for('login'))
 
     # We can use this for later reference 
@@ -156,7 +160,7 @@ def create_app():
             flash("Something went wrong!", category='error')
             return redirect(url_for('dashboard'))
 
-    # This will be our recover password page that probably will not be fully implemented
+    # This will be our recover password page that probably will most likely not be fully implemented
     @app.route('/recoverpasswd', methods=['GET', 'POST'])
     def recoverpasswd():
         return render_template("recoverpasswd.html")
@@ -165,6 +169,3 @@ def create_app():
     def contact():
         return render_template("aboutUs.html")    
     return app
-
-    #Another test comment
-    #Adding comment to test remote and local repo connection
