@@ -4,7 +4,7 @@ from flask_mysqldb import MySQL
 from functools import wraps
 from os import path
 import re
-import auth_functions
+from website import auth_functions
 
 def create_app():
     app = Flask(__name__)

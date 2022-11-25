@@ -10,8 +10,9 @@ def verify_User_Password(user_Password, db_User_password):
         return True
     else:
         return False
-    
 
-print(hash_User_Password("1234"))
+passwd = hash_User_Password("1234")
+
+print (len(passwd))
 
 
