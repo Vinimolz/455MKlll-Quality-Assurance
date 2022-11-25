@@ -4,6 +4,7 @@ from flask_mysqldb import MySQL
 from functools import wraps
 from os import path
 import re
+import auth_functions
 
 def create_app():
     app = Flask(__name__)
@@ -29,7 +30,6 @@ def create_app():
                 flash("You need to login first")
                 return redirect(url_for('login'))
         return wrap
-
 
     #----------------------------------------> Signup function <----------------------------------------------
 
