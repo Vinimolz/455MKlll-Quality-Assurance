@@ -152,7 +152,7 @@ def create_app():
             flash("Something went wrong!", category='error')
             return redirect(url_for('dashboard'))
 
-    # This will be our recover password page that probably will most likely not be fully implemented
+    # This will be our recover password page that will most likely not be fully implemented
     @app.route('/recoverpasswd', methods=['GET', 'POST'])
     def recoverpasswd():
         return render_template("recoverpasswd.html")
