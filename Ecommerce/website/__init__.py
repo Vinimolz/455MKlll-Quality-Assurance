@@ -59,8 +59,6 @@ def create_app():
                 print("passwords dont match")
             else:                
                 ipassword = auth_functions.hash_User_Password(ipassword)
-                print('----------------------PASSWORD STORED-------------------------------------')
-                print(ipassword)
                 cursor.execute('INSERT INTO Customer VALUES (NULL, % s, % s, % s, % s)', ( 
                     ifirstname, 
                     ilastname,
@@ -69,7 +67,6 @@ def create_app():
 
                 mysql.connection.commit()
                 flash('user created sucessfully')
-                print('User created')
                 return redirect(url_for('login'))
 
         return render_template("signup.html")
@@ -92,13 +89,9 @@ def create_app():
             if account_info:
                 
                 cursor.execute('SELECT UserPW FROM Customer WHERE email = % s', (email, ) )
-                db_password = cursor.fetchone()                
-
-                print(password)
-                print(db_password[0])                
+                db_password = cursor.fetchone()                                
 
                 if auth_functions.verify_User_Password(password, db_password[0]):
-                    print('db_password == password')
 
                     session['loggedin'] = True
                     session['id'] = account_info[0]

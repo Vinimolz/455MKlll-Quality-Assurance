@@ -1,4 +1,4 @@
-import unittest   # The test framework
+import unittest   
 from website import auth_functions
 from passlib.hash import sha256_crypt
 
