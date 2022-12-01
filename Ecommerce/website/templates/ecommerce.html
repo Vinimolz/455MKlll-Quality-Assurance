@@ -12,21 +12,136 @@
     <title>Ecommerce</title>
 </head>
 <body>
-<header>
-    <a href="/landpage" id="navbar_logo">Volition<span id="blueLogo">VL</span></a>
+    <header>
+        <a href="/landpage" id="navbar_logo">Volition<span id="blueLogo">VL</span></a>
 
-    <ul class="navbar">
-        <li><a href="#">Shop Now</a></li>
-        <li><a href="#">About Us</a></li>
-        <li><a href="#">Testimonials</a></li>
+        <ul class="navbar">
+            <li><a href="/ecommerce">Shop Now</a></li>
+            <li><a href="/aboutUs">About Us</a></li>
+            <li><a href="/testimonials">Testimonials</a></li>
+        </ul>
 
-    </ul>
-    <div class="icons">
+        <div class="icons">
             <a href="#"><i class='bx bx-search-alt-2' ></i></a>
-            <a href="#"><i class='bx bx-cart' ></i></a>
-            <a href="#"><i class='bx bxs-user-account'></i></a>
-    </div>
-</header>
+            <a href="/ecommerce/cart"><i class='bx bx-cart' ></i></a>
+            <a href="/ecommerce/profile"><i class='bx bxs-user-account'></i></a>
+            <a href="/logout"><i class='bx bx-log-out bx-flip-horizontal' ></i></a>
+        </div>
+    </header>
+    <section class="shop" id="shop">
+        <div class="container">
+            <div class="box">
+                <img src="{{ url_for('static', filename='images/hokas.jpg')}}"/>
+                <h5>Hokas Nimbus</h5>
+                <h6>15 USD</h6>
+                <div class="cart">
+                    <a href="#"><i class='bx bx-cart-add' ></i></a>
+
+                </div>
+            </div>
+            <div class="box">
+                <img src="{{ url_for('static', filename='images/rads.jpg')}}"/>
+                <h5>Rads Crossfit</h5>
+                <h6>30 USD</h6>
+                <div class="cart">
+                    <a href="#"><i class='bx bx-cart-add' ></i></a>
+
+                </div>
+            </div>
+            <div class="box">
+                <img src="{{ url_for('static', filename='images/adidas.jpg')}}"/>
+                <h5>Adidas NMDs R1</h5>
+                <h6>45 USD</h6>
+                <div class="cart">
+                    <a href="#"><i class='bx bx-cart-add' ></i></a>
+
+                </div>
+            </div>
+            <div class="box">
+                <img src="{{ url_for('static', filename='images/nike1.jpg')}}"/>
+                <h5>Nike Runner</h5>
+                <h6>90 USD</h6>
+                <div class="cart">
+                    <a href="#"><i class='bx bx-cart-add' ></i></a>
+
+                </div>
+            </div>
+            <div class="box">
+                <img src="{{ url_for('static', filename='images/hokas.jpg')}}"/>
+                <h5>Item description</h5>
+                <h6>Item price</h6>
+                <div class="cart">
+                    <a href="#"><i class='bx bx-cart-add' ></i></a>
+
+                </div>
+            </div>
+            <div class="box">
+                <img src="{{ url_for('static', filename='images/hokas.jpg')}}"/>
+                <h5>Item description</h5>
+                <h6>Item price</h6>
+                <div class="cart">
+                    <a href="#"><i class='bx bx-cart-add' ></i></a>
+
+                </div>
+            </div>
+            <div class="box">
+                <img src="{{ url_for('static', filename='images/hokas.jpg')}}"/>
+                <h5>Item description</h5>
+                <h6>Item price</h6>
+                <div class="cart">
+                    <a href="#"><i class='bx bx-cart-add' ></i></a>
+
+                </div>
+            </div>
+            <div class="box">
+                <img src="{{ url_for('static', filename='images/hokas.jpg')}}"/>
+                <h5>Item description</h5>
+                <h6>Item price</h6>
+                <div class="cart">
+                    <a href="#"><i class='bx bx-cart-add' ></i></a>
+
+                </div>
+            </div>
+            <div class="box">
+                <img src="{{ url_for('static', filename='images/hokas.jpg')}}"/>
+                <h5>Item description</h5>
+                <h6>Item price</h6>
+                <div class="cart">
+                    <a href="#"><i class='bx bx-cart-add' ></i></a>
+
+                </div>
+            </div>
+            <div class="box">
+                <img src="{{ url_for('static', filename='images/hokas.jpg')}}"/>
+                <h5>Item description</h5>
+                <h6>Item price</h6>
+                <div class="cart">
+                    <a href="#"><i class='bx bx-cart-add' ></i></a>
+
+                </div>
+            </div>
+            <div class="box">
+                <img src="{{ url_for('static', filename='images/hokas.jpg')}}"/>
+                <h5>Item description</h5>
+                <h6>Item price</h6>
+                <div class="cart">
+                    <a href="#"><i class='bx bx-cart-add' ></i></a>
+
+                </div>
+            </div>
+            <div class="box">
+                <img src="{{ url_for('static', filename='images/hokas.jpg')}}"/>
+                <h5>Item description</h5>
+                <h6>Item price</h6>
+                <div class="cart">
+                    <a href="#"><i class='bx bx-cart-add' ></i></a>
+
+                </div>
+            </div>
+
+        </div>
+        
+    </section>
 
 
 </body>

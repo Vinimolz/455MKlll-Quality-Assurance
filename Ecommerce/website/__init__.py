@@ -139,6 +139,31 @@ def create_app():
             flash("Something went wrong :'(", category='error')
             return redirect(url_for('login'))
 
+#-------------------------------- This will be our future cart page ----------------------------
+    @app.route('/ecommerce/cart')
+    def cart():
+        try:
+            try:
+                return render_template("cart.html", 
+                    username = session['firstName'], 
+                    user_id = session['id'])
+            except:
+                session["loggedin"] = False
+                return render_template("cart.html", 
+                    username = "Store Guest",
+                    user_id = -1)
+        except:
+            flash("Something went wrong :'(", category='error')
+            return redirect(url_for('ecommerce'))
+
+    #-------------------------------- This will be our future cart page ----------------------------
+    @app.route('/ecommerce/profile')
+    @login_required
+    def profile():
+        return render_template("profile.html", 
+            username = session['firstName'], 
+            user_id = session['id'])
+
     # We can use this for later reference 
     @app.route('/decks', methods=['GET', 'POST'])
     @login_required
