@@ -46,7 +46,7 @@ a {
 }
 
 .big-wrapper {
-  position: relative;
+  position: absolute;
   padding: 1.7rem 0 2rem;
   width: 100%;
   min-height: 100vh;

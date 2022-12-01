@@ -97,7 +97,7 @@ def create_app():
                     session['id'] = account_info[0]
                     session['firstName'] = account_info[1]
                     
-                    flash('You are logged in!')
+                    flash('You are logged in!', category='sucess')
                     print('Loggin sucessful')
                     return redirect(url_for('ecommerce'))
 
@@ -117,7 +117,7 @@ def create_app():
     def logout():
         if session["loggedin"] == True:
             session.clear()
-            flash("You have been logged out", category='success')
+            flash("You have been logged out", category='sucess')
             return redirect(url_for('login'))
         else:
             return redirect(url_for('login'))

@@ -68,6 +68,7 @@ h1{
     font-size: 2rem;
     color: #07001f;
     margin-bottom: 1.2rem;
+    font-weight: bold;
 }
 form input{
     width: 92%;
