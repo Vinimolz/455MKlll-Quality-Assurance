@@ -1,10 +1,10 @@
-*, *::after, *::before {
+*{
     box-sizing: border-box;
-  }
+}
   
-  .modal {
+.modal {
     position: fixed;
-    top: 50%;
+    top: 60%;
     left: 50%;
     transform: translate(-50%, -50%) scale(0);
     transition: 200ms ease-in-out;
@@ -12,41 +12,62 @@
     border-radius: 10px;
     z-index: 10;
     background-color: white;
-    width: 500px;
+    width: 550px;
     max-width: 80%;
-  }
+}
   
-  .modal.active {
+.modal.active {
     transform: translate(-50%, -50%) scale(1);
-  }
-  
-  .modal-header {
+}
+.modal-header {
     padding: 10px 15px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid black;
-  }
+}
   
-  .modal-header .title {
+.modal-header .title {
     font-size: 1.25rem;
     font-weight: bold;
-  }
+}
   
-  .modal-header .close-button {
+.modal-header .close-button {
     cursor: pointer;
     border: none;
     outline: none;
     background: none;
     font-size: 1.25rem;
     font-weight: bold;
-  }
+}
   
-  .modal-body {
+.modal-body {
     padding: 10px 15px;
-  }
-  
-  #overlay {
+}
+.modal-body h4{
+    padding-bottom: 15px;
+    padding-top: 15px;
+}
+
+.modal-body button{
+    font-size: 1rem;
+    margin-top: 2rem;
+    padding: 10px 0;
+    border-radius: 20px;
+    outline: none;
+    border: none;
+    width: 100%;
+    color: #fff;
+    cursor: pointer;
+    background: #49a4dc;
+}
+.modal-body button:hover{
+    background: #387aa2;
+}
+.modal-body h4:nth-child(1){
+    padding-top: 0;
+}
+#overlay {
     position: fixed;
     opacity: 0;
     transition: 200ms ease-in-out;
@@ -56,9 +77,56 @@
     bottom: 0;
     background-color: rgba(0, 0, 0, .5);
     pointer-events: none;
-  }
+}
   
-  #overlay.active {
+#overlay.active {
     opacity: 1;
     pointer-events: all;
-  }
+}
+
+.radio-container{
+    font-size: 24px;
+    padding: 8px;
+    text-align: center;
+}
+
+input[type="radio"]{
+    display: none;
+}
+
+label{
+    position: relative;
+    cursor: pointer;
+    padding-right: 15px;
+}
+label:nth-last-child(1){
+    padding-right: 0;
+    
+}
+label::before{
+    content: "";
+    border: 2px solid #222;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    margin: -8px 20px;
+    margin-left: 0;
+    border-radius: 50%;
+}
+label::after{
+    content: "";
+    display: inline-block;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: rgba(73, 164, 220, 0);
+    left: 8px;
+    top: 10px;
+    margin: -12px 10px;
+    margin-left: 0;
+    border-radius: 50%;
+    transition: all 0.4s;
+}
+input[type="radio"]:checked + label::after{
+    background: rgba(73, 164, 220, 1);
+}
