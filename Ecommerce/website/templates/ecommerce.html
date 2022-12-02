@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <link rel="stylesheet" href="{{ url_for('static', filename='css/ecommerce.css')}}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/modal.css')}}" />
 
     <!-- This is the link for incons -->
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
@@ -22,7 +22,8 @@
         </ul>
 
         <div class="icons">
-            <a href="#"><i class='bx bx-search-alt-2' ></i></a>
+            <button data-modal-target="#modal"><i class='bx bx-search-alt-2' ></i></button>
+            <!--<a href="#"><i class='bx bx-search-alt-2' ></i></a>-->
             <a href="/ecommerce/cart"><i class='bx bx-cart' ></i></a>
             <a href="/ecommerce/profile"><i class='bx bxs-user-account'></i></a>
             <a href="/logout"><i class='bx bx-log-out bx-flip-horizontal' ></i></a>
@@ -143,6 +144,17 @@
         
     </section>
 
+    <div class="modal" id="modal">
+        <div class="modal-header">
+          <div class="title">Example Modal</div>
+          <button data-close-button class="close-button">&times;</button>
+        </div>
+        <div class="modal-body">
+            
+        </div>
+      </div>
+      <div id="overlay"></div>
 
+      <script src="{{url_for('static', filename='js/modal.js')}}"></script>
 </body>
 </html>
