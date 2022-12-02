@@ -123,7 +123,7 @@ def create_app():
             return redirect(url_for('login'))
 
     #-------------------------------- This will be our future ecommerce main page ----------------------------
-    @app.route('/ecommerce')
+    @app.route('/ecommerce', methods=['GET', 'POST'])
     def ecommerce():
         try:
             try:
@@ -135,6 +135,16 @@ def create_app():
                 return render_template("ecommerce.html", 
                     username = "Store Guest",
                     user_id = -1)
+            finally:
+                if request.method == 'POST':
+                    brand = request.form.get('brand')
+                    type = request.form.get('type')
+                    color = request.form.get('color')
+                    sex = request.form.get('sex')
+
+                    print(brand + " " + type + " " + color + " " + sex)
+                    print("here")
+                    return render_template("ecommerce.html")
         except:
             flash("Something went wrong :'(", category='error')
             return redirect(url_for('login'))
