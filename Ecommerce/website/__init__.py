@@ -134,15 +134,14 @@ def create_app():
         try:            
             if session['loggedin']:
                 shoeList = fetchAllShoes()
-                print("passed by first if (user loggedin == true)")
-                return render_template("ecommerce.html", username = session['firstName'], sendList = shoeList, imagePath = "nike1.jpg")
+                return render_template("ecommerce.html", username = session['firstName'], sendList = shoeList)
             else:
                 session['loggedin'] = False
                 session['firstName'] = "Store Guest"
                 session['id'] = -1
                 shoeList = fetchAllShoes()
                 print("passed by else statement (user loggedin == false)")
-                return render_template("ecommerce.html", username = session['firstName'], sendList = shoeList, imagePath = "hokas.jpg")
+                return render_template("ecommerce.html", username = session['firstName'], sendList = shoeList)
             
         except:
             flash("Something went wrong :'(", category='error')

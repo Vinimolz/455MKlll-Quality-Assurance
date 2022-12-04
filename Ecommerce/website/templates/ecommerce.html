@@ -35,11 +35,11 @@
     <section class="shop" id="shop">
         <div class="container">
 
-            {% for item in sendList %}
+            {% for shoe in sendList %}
                 <div class="box">
-                    <img src="{{ url_for('static', filename='images/' + imagePath)}}"/>
-                    <h5>Hokas Nimbus</h5>
-                    <h6>15 USD</h6>
+                    <img src="{{ url_for('static', filename='images/' + shoe[7])}}"/>
+                    <h5>{{shoe[1]}}</h5>
+                    <h6>{{shoe[2]}}</h6>
                     <div class="cart">
                         <a href="#"><i class='bx bx-cart-add' ></i></a>
                     </div>
