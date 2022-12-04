@@ -129,23 +129,34 @@ def create_app():
             return redirect(url_for('login'))
 
     #-------------------------------- This will be our future ecommerce main page --------------------------    @app.route('/ecommerce', methods=['GET', 'POST'])
-    @app.route("/ecommerce")
+    @app.route("/ecommerce", methods=['GET', 'POST'])
     def ecommerce():
         try:            
             if session['loggedin']:
                 shoeList = fetchAllShoes()
-                return render_template("ecommerce.html", username = session['firstName'], sendList = shoeList)
+                return render_template("ecommerce.html", username = session['firstName'], id = session['id'], sendList = shoeList)
             else:
                 session['loggedin'] = False
                 session['firstName'] = "Store Guest"
                 session['id'] = -1
                 shoeList = fetchAllShoes()
                 print("passed by else statement (user loggedin == false)")
-                return render_template("ecommerce.html", username = session['firstName'], sendList = shoeList)
-            
+                return render_template("ecommerce.html", username = session['firstName'], id = session['id'], sendList = shoeList)
+
         except:
             flash("Something went wrong :'(", category='error')
             return redirect(url_for('login'))
+
+        finally:
+            if request.method == 'POST':
+                formBrand = request.form.get("brand")
+                formType = request.form.get("type")
+                formColor = request.form.get("color")
+                formSex = request.form.get("sex")
+
+                searchShoeList = userShoeSearch(brand=formBrand, type=formType, color=formColor, sex=formSex)
+                print("After function call") 
+                return render_template("ecommerce.html", username = session['firstName'], id = session['id'], sendList = searchShoeList)
 
 #-------------------------------- This will be our future cart page --------------------------------------
     @app.route('/ecommerce/cart')
@@ -193,10 +204,10 @@ def create_app():
             print(shoe)
         return allShoes
 
-    def userShoeSearch(brand, shoeType, color, gender):
+    def userShoeSearch(brand, type, color, sex):
         #cursor.execute('SELECT * FROM Customer WHERE email = % s', (iemail, ))
         cursor = mysql.connection.cursor()
-        cursor.execute('SELECT DISTINCT Shoes.ShoeID, ShoeName, CustPrice, Brand, ShoeType, Color, Gender, PicturePath FROM Shoes, Inventory WHERE Shoes.ShoeID = Inventory.ShoeID AND Brand = % s AND ShoeType = % s AND Color = % s AND Gender = % s' , (brand, shoeType, color, gender,  ))
+        cursor.execute('SELECT DISTINCT Shoes.ShoeID, ShoeName, CustPrice, Brand, ShoeType, Color, Gender, PicturePath FROM Shoes, Inventory WHERE Shoes.ShoeID = Inventory.ShoeID AND Brand = % s AND ShoeType = % s AND Color = % s AND Gender = % s' , (brand, type, color, sex,  ))
         shoeSearch = cursor.fetchall()
         for shoe in shoeSearch:
             print(shoe)

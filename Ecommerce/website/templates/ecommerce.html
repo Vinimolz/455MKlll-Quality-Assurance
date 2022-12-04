@@ -39,15 +39,15 @@
                 <div class="box">
                     <img src="{{ url_for('static', filename='images/' + shoe[7])}}"/>
                     <h5>{{shoe[1]}}</h5>
-                    <h6>{{shoe[2]}}</h6>
+                    <h6>US$ </US1>{{shoe[2]}}</h6>
                     <div class="cart">
                         <a href="#"><i class='bx bx-cart-add' ></i></a>
                     </div>
-                    
+                    <br>
                     <div class="AddForm">
                         <form method="POST"></form>
                             <input class="cartInput" type="input" value={{sendList[item]}} name="id" id="addToCart">
-                            <label for="">Add to Cart</label>
+                            <label for="">View Model</label>
                         </form>
                     </div>                   
                     <!--
@@ -58,111 +58,6 @@
                     </button>-->
                 </div>
             {% endfor %}
-            <!--
-            <div class="box">
-                <img src="{{ url_for('static', filename='images/rads.jpg')}}"/>
-                <h5>Rads Crossfit</h5>
-                <h6>30 USD</h6>
-                <div class="cart">
-                    <a href="#"><i class='bx bx-cart-add' ></i></a>
-
-                </div>
-                <button>Add To Cart</button>
-            </div>
-            <div class="box">
-                <img src="{{ url_for('static', filename='images/adidas.jpg')}}"/>
-                <h5>Adidas NMDs R1</h5>
-                <h6>45 USD</h6>
-                <div class="cart">
-                    <a href="#"><i class='bx bx-cart-add' ></i></a>
-
-                </div>
-                <button>Add To Cart</button>
-            </div>
-            <div class="box">
-                <img src="{{ url_for('static', filename='images/nike1.jpg')}}"/>
-                <h5>Nike Runner</h5>
-                <h6>90 USD</h6>
-                <div class="cart">
-                    <a href="#"><i class='bx bx-cart-add' ></i></a>
-
-                </div>
-                <button>Add To Cart</button>
-            </div>
-            <div class="box">
-                <img src="{{ url_for('static', filename='images/hokas.jpg')}}"/>
-                <h5>Item description</h5>
-                <h6>Item price</h6>
-                <div class="cart">
-                    <a href="#"><i class='bx bx-cart-add' ></i></a>
-
-                </div>
-                <button>Add To Cart</button>
-            </div>
-            <div class="box">
-                <img src="{{ url_for('static', filename='images/hokas.jpg')}}"/>
-                <h5>Item description</h5>
-                <h6>Item price</h6>
-                <div class="cart">
-                    <a href="#"><i class='bx bx-cart-add' ></i></a>
-                </div>
-                <button>Add To Cart</button>
-            </div>
-            <div class="box">
-                <img src="{{ url_for('static', filename='images/hokas.jpg')}}"/>
-                <h5>Item description</h5>
-                <h6>Item price</h6>
-                <div class="cart">
-                    <a href="#"><i class='bx bx-cart-add' ></i></a>
-                </div>
-                <button>Add To Cart</button>
-            </div>
-            <div class="box">
-                <img src="{{ url_for('static', filename='images/hokas.jpg')}}"/>
-                <h5>Item description</h5>
-                <h6>Item price</h6>
-                <div class="cart">
-                    <a href="#"><i class='bx bx-cart-add' ></i></a>
-                </div>
-                <button>Add To Cart</button>
-            </div>
-            <div class="box">
-                <img src="{{ url_for('static', filename='images/hokas.jpg')}}"/>
-                <h5>Item description</h5>
-                <h6>Item price</h6>
-                <div class="cart">
-                    <a href="#"><i class='bx bx-cart-add' ></i></a>
-                </div>
-                <button>Add To Cart</button>
-            </div>
-            <div class="box">
-                <img src="{{ url_for('static', filename='images/hokas.jpg')}}"/>
-                <h5>Item description</h5>
-                <h6>Item price</h6>
-                <div class="cart">
-                    <a href="#"><i class='bx bx-cart-add' ></i></a>
-                </div>
-                <button>Add To Cart</button>
-            </div>
-            <div class="box">
-                <img src="{{ url_for('static', filename='images/hokas.jpg')}}"/>
-                <h5>Item description</h5>
-                <h6>Item price</h6>
-                <div class="cart">
-                    <a href="#"><i class='bx bx-cart-add' ></i></a>
-                </div>
-                <button>Add To Cart</button>
-            </div>
-            <div class="box">
-                <img src="{{ url_for('static', filename='images/hokas.jpg')}}"/>
-                <h5>Item description</h5>
-                <h6>Item price</h6>
-                <div class="cart">
-                    <a href="#"><i class='bx bx-cart-add' ></i></a>
-                </div>
-                <button>Add To Cart</button>
-            </div>
-            -->
         </div>        
     </section>
 
