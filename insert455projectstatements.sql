@@ -10,9 +10,9 @@ INSERT INTO Inventory VALUES(10004, 1002, 8, 6);
 INSERT INTO Inventory VALUES(10005, 1003, 4, 0);
 INSERT INTO Inventory VALUES(10006, 1002, 4.5, 0);
 
-INSERT INTO Customer VALUES(1, 'Luke', 'Smith', 'csluke@outlook.com', '1234');
-INSERT INTO Customer VALUES(2, 'Vini', 'Molz', 'vinimolz@gmail.com', '1234');
-INSERT INTO Customer VALUES(3, 'Donald', 'Trump', 'iamFamous@me.com', '1234');
+--INSERT INTO Customer VALUES(1, 'Luke', 'Smith', 'csluke@outlook.com', '1234');
+--INSERT INTO Customer VALUES(2, 'Vini', 'Molz', 'vinimolz@gmail.com', '1234');
+--INSERT INTO Customer VALUES(3, 'Donald', 'Trump', 'iamFamous@me.com', '1234');
 
 -- these need to be updated
 INSERT INTO CartItem VALUES(1, 10001, 1 );

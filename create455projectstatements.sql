@@ -31,11 +31,12 @@ CREATE TABLE Inventory (
 CONSTRAINT FK_Inventory FOREIGN KEY (ShoeID) REFERENCES Shoes(ShoeID));
 
 CREATE TABLE Customer (
-	UserID		INT		PRIMARY KEY,
-    FirstName	VARCHAR(10)		NOT NULL,
+	UserID		INT		AUTO_INCREMENT,
+    FirstName	VARCHAR(15)		NOT NULL,
     LastName	VARCHAR(15)		NOT NULL,
     email		VARCHAR(25)		NOT NULL,
-    UserPW		VARCHAR(75)		NOT NULL
+    UserPW		VARCHAR(75)		NOT NULL,
+    PRIMARY KEY(UserId)
     );
 
 CREATE TABLE CartItem (
