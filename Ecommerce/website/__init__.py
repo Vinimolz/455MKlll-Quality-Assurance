@@ -58,7 +58,9 @@ def create_app():
                 flash('Make sure passwords match', category='error')
                 print("passwords dont match")
             else:                
-                ipassword = auth_functions.hash_User_Password(ipassword)
+                #ipassword = auth_functions.hash_User_Password(ipassword)
+                ipassword = sha256_crypt.encrypt(ipassword)
+                print(ipassword)
                 cursor.execute('INSERT INTO Customer VALUES (NULL, % s, % s, % s, % s)', ( 
                     ifirstname, 
                     ilastname,
@@ -90,8 +92,10 @@ def create_app():
                 
                 cursor.execute('SELECT UserPW FROM Customer WHERE email = % s', (email, ) )
                 db_password = cursor.fetchone()                                
-
-                if auth_functions.verify_User_Password(password, db_password[0]):
+                print("Before auth login function")
+                print(db_password[0])
+                #if auth_functions.verify_User_Password(password, db_password[0]):
+                if sha256_crypt.verify(password, db_password[0]):
 
                     session['loggedin'] = True
                     session['id'] = account_info[0]
