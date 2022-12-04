@@ -35,7 +35,7 @@ CREATE TABLE Customer (
     FirstName	VARCHAR(10)		NOT NULL,
     LastName	VARCHAR(15)		NOT NULL,
     email		VARCHAR(25)		NOT NULL,
-    UserPW		VARCHAR(64)		NOT NULL
+    UserPW		VARCHAR(75)		NOT NULL
     );
 
 CREATE TABLE CartItem (
