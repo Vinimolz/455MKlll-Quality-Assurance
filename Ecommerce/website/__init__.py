@@ -135,7 +135,8 @@ def create_app():
                 return render_template("ecommerce.html", 
                     username = session['firstName'], 
                     user_id = session['id'],
-                    sendList = myTestList)
+                    sendList = myTestList,
+                    imagePath = "nike1.jpg")
             except:
                 session["loggedin"] = False
                 myTestList = testList()
@@ -184,19 +185,6 @@ def create_app():
             username = session['firstName'], 
             user_id = session['id'])
 
-    # We can use this for later reference 
-    @app.route('/decks', methods=['GET', 'POST'])
-    @login_required
-    def decks():
-        try:
-            user_id = session['id']
-            username = session['username']
-            #query
-            return render_template("decks.html", username = session['username'], user_id = session['id'])
-        except:
-            flash("Something went wrong!", category='error')
-            return redirect(url_for('dashboard'))
-
     # This will be our recover password page that will most likely not be fully implemented
     @app.route('/recoverpasswd', methods=['GET', 'POST'])
     def recoverpasswd():
@@ -209,5 +197,22 @@ def create_app():
     def testList():
         list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
         return list
+
+    def fetchAllShoes():
+        cursor = mysql.connection.cursor()
+        cursor.execute('SELECT DISTINCT Shoes.ShoeID, ShoeName, CustPrice, Brand, ShoeType, Color, Gender, PicturePath FROM Shoes, Inventory WHERE Shoes.ShoeID = Inventory.ShoeID AND Quantity > 0;')
+        allShoes = cursor.fetchall()
+        for shoe in allShoes:
+            print(shoe)
+        pass
+
+    def userShoeSearch(brand, shoeType, color, gender):
+        #cursor.execute('SELECT * FROM Customer WHERE email = % s', (iemail, ))
+        cursor = mysql.connection.cursor()
+        cursor.execute('SELECT DISTINCT Shoes.ShoeID, ShoeName, CustPrice, Brand, ShoeType, Color, Gender, PicturePath FROM Shoes, Inventory WHERE Shoes.ShoeID = Inventory.ShoeID AND Brand = % s AND ShoeType = % s AND Color = % s AND Gender = % s' , (brand, shoeType, color, gender,  ))
+        shoeSearch = cursor.fetchall()
+        for shoe in shoeSearch:
+            print(shoe)
+        pass
 
     return app
