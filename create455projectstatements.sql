@@ -16,11 +16,11 @@ CREATE TABLE Shoes (
     ShoeName	VARCHAR(20)	NOT NULL,
     Cost		FLOAT(6)	NOT NULL,
     CustPrice	FLOAT(6)	NOT NULL,
-    Brand 		ENUM('Nike','Addidas','Other'),
+    Brand 		ENUM('Nike','Addidas','Hoka','Other'),
     ShoeType	ENUM('Tennis','Running','Other'),
-    Color		ENUM('Red','Blue',''),
-    Gender		ENUM('Male','Female')
-    -- PicturePath 
+    Color		ENUM('Red','Blue','White','Other'),
+    Gender		ENUM('Male','Female'),
+    PicturePath VARCHAR(30)
     );
 
 CREATE TABLE Inventory (
@@ -31,12 +31,11 @@ CREATE TABLE Inventory (
 CONSTRAINT FK_Inventory FOREIGN KEY (ShoeID) REFERENCES Shoes(ShoeID));
 
 CREATE TABLE Customer (
-	UserID		INT		NOT NULL AUTO_INCREMENT,
+	UserID		INT		PRIMARY KEY,
     FirstName	VARCHAR(10)		NOT NULL,
     LastName	VARCHAR(15)		NOT NULL,
     email		VARCHAR(25)		NOT NULL,
-    UserPW		VARCHAR(100)		NOT NULL,
-    PRIMARY KEY(UserID)
+    UserPW		VARCHAR(64)		NOT NULL
     );
 
 CREATE TABLE CartItem (
@@ -54,7 +53,7 @@ CREATE TABLE Guest (
 
 CREATE TABLE Addresses (
 	AddressID	INT				PRIMARY KEY,
-    UserID		INT				NOT NULL,
+    UserID		INT,
 	Street1		VARCHAR(30)		NOT NULL,
     Street2		VARCHAR(30)		NOT NULL,
     City		VARCHAR(25)		NOT NULL,
@@ -67,7 +66,7 @@ CREATE TABLE PaymentInfo (
     AddressID	INT				NOT NULL,
     UserID		INT,
     NameOnCard	VARCHAR(35)		NOT NULL,
-    CardNum		INT				NOT NULL,
+    CardNum		BIGINT			NOT NULL,
     CVC			INT				NOT NULL,
     ExDate		DATE			NOT NULL,
 CONSTRAINT FK1_PaymentInfo FOREIGN KEY (AddressID) REFERENCES Addresses(AddressID),
