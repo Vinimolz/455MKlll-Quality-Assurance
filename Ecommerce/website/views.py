@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, session
 from flask_mysqldb import MySQL
 
 views = Blueprint("views", __name__)
@@ -6,7 +6,7 @@ views = Blueprint("views", __name__)
 @views.route("/")
 @views.route("/landpage")
 def landpage():
-    return render_template("landpage.html")
+        return render_template("landpage.html")
 
 @views.route("/testimonials")
 def testimonials():

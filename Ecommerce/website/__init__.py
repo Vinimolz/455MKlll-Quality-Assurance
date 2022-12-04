@@ -114,53 +114,41 @@ def create_app():
 
         return render_template("login.html")
     
-    #---------------------------------------> Logout Function <------------------------------------------------
+    #---------------------------------------> Logout Function <-------------------------------------------
     # Function for a future logout button that can only be accessed if user is logged in 
     @app.route("/logout")
     #@login_required
     def logout():
         if session["loggedin"] == True:
-            session.clear()
+            session.pop('firstName')
+            session.pop('id')
+            session["loggedin"] = False
             flash("You have been logged out", category='sucess')
             return redirect(url_for('login'))
         else:
             return redirect(url_for('login'))
 
-    #-------------------------------- This will be our future ecommerce main page ----------------------------
-    @app.route('/ecommerce', methods=['GET', 'POST'])
+    #-------------------------------- This will be our future ecommerce main page --------------------------    @app.route('/ecommerce', methods=['GET', 'POST'])
+    @app.route("/ecommerce")
     def ecommerce():
-        try:
-            try:
-                myTestList = testList()
-                return render_template("ecommerce.html", 
-                    username = session['firstName'], 
-                    user_id = session['id'],
-                    sendList = myTestList,
-                    imagePath = "nike1.jpg")
-            except:
-                session["loggedin"] = False
-                myTestList = testList()
-                return render_template("ecommerce.html", 
-                    username = "Store Guest",
-                    user_id = -1, 
-                    sendList = myTestList)
-            finally:
-                if request.method == 'POST':
-                    brand = request.form.get('brand')
-                    type = request.form.get('type')
-                    color = request.form.get('color')
-                    sex = request.form.get('sex')
-
-                    myTestList = testList()
-
-                    print(brand + " " + type + " " + color + " " + sex)
-                    print("here")
-                    return render_template("ecommerce.html", sendList = myTestList)
+        try:            
+            if session['loggedin']:
+                shoeList = fetchAllShoes()
+                print("passed by first if (user loggedin == true)")
+                return render_template("ecommerce.html", username = session['firstName'], sendList = shoeList, imagePath = "nike1.jpg")
+            else:
+                session['loggedin'] = False
+                session['firstName'] = "Store Guest"
+                session['id'] = -1
+                shoeList = fetchAllShoes()
+                print("passed by else statement (user loggedin == false)")
+                return render_template("ecommerce.html", username = session['firstName'], sendList = shoeList, imagePath = "hokas.jpg")
+            
         except:
             flash("Something went wrong :'(", category='error')
             return redirect(url_for('login'))
 
-#-------------------------------- This will be our future cart page ----------------------------
+#-------------------------------- This will be our future cart page --------------------------------------
     @app.route('/ecommerce/cart')
     def cart():
         try:
@@ -204,7 +192,7 @@ def create_app():
         allShoes = cursor.fetchall()
         for shoe in allShoes:
             print(shoe)
-        pass
+        return allShoes
 
     def userShoeSearch(brand, shoeType, color, gender):
         #cursor.execute('SELECT * FROM Customer WHERE email = % s', (iemail, ))
