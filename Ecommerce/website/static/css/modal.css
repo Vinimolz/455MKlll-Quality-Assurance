@@ -94,16 +94,16 @@ input[type="radio"]{
     display: none;
 }
 
-label{
+.search{
     position: relative;
     cursor: pointer;
     padding-right: 15px;
 }
-label:nth-last-child(1){
+.search:nth-last-child(1){
     padding-right: 0;
     
 }
-label::before{
+.search::before{
     content: "";
     border: 2px solid #222;
     display: inline-block;
@@ -113,7 +113,7 @@ label::before{
     margin-left: 0;
     border-radius: 50%;
 }
-label::after{
+.search::after{
     content: "";
     display: inline-block;
     position: absolute;
@@ -127,6 +127,6 @@ label::after{
     border-radius: 50%;
     transition: all 0.4s;
 }
-input[type="radio"]:checked + label::after{
+input[type="radio"]:checked + .search::after{
     background: rgba(73, 164, 220, 1);
 }

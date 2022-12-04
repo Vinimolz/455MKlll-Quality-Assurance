@@ -127,14 +127,18 @@ def create_app():
     def ecommerce():
         try:
             try:
+                myTestList = testList()
                 return render_template("ecommerce.html", 
                     username = session['firstName'], 
-                    user_id = session['id'])
+                    user_id = session['id'],
+                    sendList = myTestList)
             except:
                 session["loggedin"] = False
+                myTestList = testList()
                 return render_template("ecommerce.html", 
                     username = "Store Guest",
-                    user_id = -1)
+                    user_id = -1, 
+                    sendList = myTestList)
             finally:
                 if request.method == 'POST':
                     brand = request.form.get('brand')
@@ -142,9 +146,11 @@ def create_app():
                     color = request.form.get('color')
                     sex = request.form.get('sex')
 
+                    myTestList = testList()
+
                     print(brand + " " + type + " " + color + " " + sex)
                     print("here")
-                    return render_template("ecommerce.html")
+                    return render_template("ecommerce.html", sendList = myTestList)
         except:
             flash("Something went wrong :'(", category='error')
             return redirect(url_for('login'))
@@ -166,7 +172,7 @@ def create_app():
             flash("Something went wrong :'(", category='error')
             return redirect(url_for('ecommerce'))
 
-    #-------------------------------- This will be our future cart page ----------------------------
+    #-------------------------------- This will be our future profile page ----------------------------
     @app.route('/ecommerce/profile')
     @login_required
     def profile():
@@ -194,5 +200,10 @@ def create_app():
 
     @app.route('/ContactUs')
     def contact():
-        return render_template("aboutUs.html")    
+        return render_template("aboutUs.html")
+
+    def testList():
+        list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+        return list
+
     return app

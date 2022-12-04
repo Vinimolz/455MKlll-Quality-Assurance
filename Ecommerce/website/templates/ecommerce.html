@@ -9,6 +9,9 @@
 
     <!-- This is the link for incons -->
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <script type="text/javascript">
+        var user = '{{username}}'
+    </script>
     <title>Ecommerce</title>
 </head>
 <body>
@@ -29,17 +32,34 @@
             <a href="/logout"><i class='bx bx-log-out bx-flip-horizontal' ></i></a>
         </div>
     </header>
+    <h1>This is a test, {{username}}</h1>
     <section class="shop" id="shop">
         <div class="container">
-            <div class="box">
-                <img src="{{ url_for('static', filename='images/hokas.jpg')}}"/>
-                <h5>Hokas Nimbus</h5>
-                <h6>15 USD</h6>
-                <div class="cart">
-                    <a href="#"><i class='bx bx-cart-add' ></i></a>
 
+            {% for item in sendList %}
+                <div class="box">
+                    <img src="{{ url_for('static', filename='images/hokas.jpg')}}"/>
+                    <h5>Hokas Nimbus</h5>
+                    <h6>15 USD</h6>
+                    <div class="cart">
+                        <a href="#"><i class='bx bx-cart-add' ></i></a>
+                    </div>
+                    
+                    <div class="AddForm">
+                        <form method="POST"></form>
+                            <input class="cartInput" type="input" value={{sendList[item]}} name="id" id="addToCart">
+                            <label for="">Add to Cart</label>
+                        </form>
+                    </div>                   
+                    <!--
+                    <button
+                        data-product="{{sendList[item]}}"
+                        data-action="add" 
+                        class="btn btn-outline-secondary add-btn update-cart">Add To Cart
+                    </button>-->
                 </div>
-            </div>
+            {% endfor %}
+            <!--
             <div class="box">
                 <img src="{{ url_for('static', filename='images/rads.jpg')}}"/>
                 <h5>Rads Crossfit</h5>
@@ -48,6 +68,7 @@
                     <a href="#"><i class='bx bx-cart-add' ></i></a>
 
                 </div>
+                <button>Add To Cart</button>
             </div>
             <div class="box">
                 <img src="{{ url_for('static', filename='images/adidas.jpg')}}"/>
@@ -57,6 +78,7 @@
                     <a href="#"><i class='bx bx-cart-add' ></i></a>
 
                 </div>
+                <button>Add To Cart</button>
             </div>
             <div class="box">
                 <img src="{{ url_for('static', filename='images/nike1.jpg')}}"/>
@@ -66,6 +88,7 @@
                     <a href="#"><i class='bx bx-cart-add' ></i></a>
 
                 </div>
+                <button>Add To Cart</button>
             </div>
             <div class="box">
                 <img src="{{ url_for('static', filename='images/hokas.jpg')}}"/>
@@ -75,6 +98,7 @@
                     <a href="#"><i class='bx bx-cart-add' ></i></a>
 
                 </div>
+                <button>Add To Cart</button>
             </div>
             <div class="box">
                 <img src="{{ url_for('static', filename='images/hokas.jpg')}}"/>
@@ -82,8 +106,8 @@
                 <h6>Item price</h6>
                 <div class="cart">
                     <a href="#"><i class='bx bx-cart-add' ></i></a>
-
                 </div>
+                <button>Add To Cart</button>
             </div>
             <div class="box">
                 <img src="{{ url_for('static', filename='images/hokas.jpg')}}"/>
@@ -91,8 +115,8 @@
                 <h6>Item price</h6>
                 <div class="cart">
                     <a href="#"><i class='bx bx-cart-add' ></i></a>
-
                 </div>
+                <button>Add To Cart</button>
             </div>
             <div class="box">
                 <img src="{{ url_for('static', filename='images/hokas.jpg')}}"/>
@@ -100,8 +124,8 @@
                 <h6>Item price</h6>
                 <div class="cart">
                     <a href="#"><i class='bx bx-cart-add' ></i></a>
-
                 </div>
+                <button>Add To Cart</button>
             </div>
             <div class="box">
                 <img src="{{ url_for('static', filename='images/hokas.jpg')}}"/>
@@ -109,8 +133,8 @@
                 <h6>Item price</h6>
                 <div class="cart">
                     <a href="#"><i class='bx bx-cart-add' ></i></a>
-
                 </div>
+                <button>Add To Cart</button>
             </div>
             <div class="box">
                 <img src="{{ url_for('static', filename='images/hokas.jpg')}}"/>
@@ -118,8 +142,8 @@
                 <h6>Item price</h6>
                 <div class="cart">
                     <a href="#"><i class='bx bx-cart-add' ></i></a>
-
                 </div>
+                <button>Add To Cart</button>
             </div>
             <div class="box">
                 <img src="{{ url_for('static', filename='images/hokas.jpg')}}"/>
@@ -127,8 +151,8 @@
                 <h6>Item price</h6>
                 <div class="cart">
                     <a href="#"><i class='bx bx-cart-add' ></i></a>
-
                 </div>
+                <button>Add To Cart</button>
             </div>
             <div class="box">
                 <img src="{{ url_for('static', filename='images/hokas.jpg')}}"/>
@@ -136,12 +160,11 @@
                 <h6>Item price</h6>
                 <div class="cart">
                     <a href="#"><i class='bx bx-cart-add' ></i></a>
-
                 </div>
+                <button>Add To Cart</button>
             </div>
-
-        </div>
-        
+            -->
+        </div>        
     </section>
 
     <div class="modal" id="modal">
@@ -156,49 +179,49 @@
                 <form method="POST">
                     <h4>Brand:</h4>
                     <input type="radio" id="nike" name="brand" value="nike">
-                    <label for="nike">Nike</label>
+                    <label class="search" for="nike">Nike</label>
 
                     <input type="radio" id="hokas" name="brand" value="hokas">
-                    <label for="hokas">Hokas</label>
+                    <label class="search" for="hokas">Hokas</label>
 
                     <input type="radio" id="rads" name="brand" value="rads">
-                    <label for="rads">Rads</label>
+                    <label class="search" for="rads">Rads</label>
 
                     <input type="radio" id="adidas" name="brand" value="adidas">
-                    <label for="adidas">Adidas</label>
+                    <label class="search" for="adidas">Adidas</label>
 
                     <h4>Type:</h4>
                     <input type="radio" id="tennis" name="type" value="tennis">
-                    <label for="tennis">Tennis</label>
+                    <label class="search" for="tennis">Tennis</label>
 
                     <input type="radio" id="lifting" name="type" value="lifting">
-                    <label for="lifting">Lifting</label>
+                    <label class="search" for="lifting">Lifting</label>
 
                     <input type="radio" id="running" name="type" value="running">
-                    <label for="running">Running</label>
+                    <label class="search" for="running">Running</label>
 
                     <input type="radio" id="hiking" name="type" value="hiking">
-                    <label for="hiking">Hiking</label>
+                    <label class="search" for="hiking">Hiking</label>
 
                     <h4>Color:</h4>
                     <input type="radio" id="white" name="color" value="white">
-                    <label for="white">White</label>
+                    <label class="search" for="white">White</label>
 
                     <input type="radio" id="black" name="color" value="black">
-                    <label for="black">Black</label>
+                    <label class="search" for="black">Black</label>
 
                     <input type="radio" id="red" name="color" value="red">
-                    <label for="red">red</label>
+                    <label class="search" for="red">red</label>
 
                     <input type="radio" id="blue" name="color" value="blue">
-                    <label for="blue">Blue</label>
+                    <label class="search" for="blue">Blue</label>
 
                     <h4>Sex:</h4>
                     <input type="radio" id="male" name="sex" value="male">
-                    <label for="male">Male</label>
+                    <label class="search" for="male">Male</label>
 
                     <input type="radio" id="female" name="sex" value="female">
-                    <label for="female">Female</label>
+                    <label class="search" for="female">Female</label>
 
                     <button>Search</button>
                 </form>
@@ -209,5 +232,6 @@
       <div id="overlay"></div>
 
       <script src="{{url_for('static', filename='js/modal.js')}}"></script>
+      <script src="{{url_for('static', filename='js/cart.js')}}"></script>
 </body>
 </html>
