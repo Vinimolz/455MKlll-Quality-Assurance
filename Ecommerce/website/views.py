@@ -6,7 +6,14 @@ views = Blueprint("views", __name__)
 @views.route("/")
 @views.route("/landpage")
 def landpage():
-        return render_template("landpage.html")
+        if "loggedin" not in session:
+                session["loggedin"] = False
+                print("assigned loggedin False")
+                return render_template("landpage.html")
+        else:   
+                print("Did not re assigned loggedin")
+                print(session['loggedin'])
+                return render_template("landpage.html")
 
 @views.route("/testimonials")
 def testimonials():

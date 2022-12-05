@@ -1,8 +1,8 @@
 INSERT INTO Shoes VALUES(1001, 'SuperSpeed 1000', 55.99, 99.99, 'Nike', 'Running', 'White', 'Male', "nike1.jpg");
 INSERT INTO Shoes VALUES(1002, "Fast Girl", 34.99, 74.99, 'Addidas', 'Running', 'Red', 'Female', "adidas.jpg");
 INSERT INTO Shoes VALUES(1003, "The Charger", 47.89, 56.99, 'Hoka', 'Tennis', 'Red', 'Female', "hokas.jpg");
-INSERT INTO Shoes VALUES(1004, 'The Elusive', 56.78, 89.99, 'Hoka', 'Other', 'Blue', 'Male', "rads.jpg");
-INSERT INTO Shoes VALUES(1005, 'SuperSpeed 2000', 56.78, 89.99, 'Nike', 'Running', 'White', 'Male', "rads.jpg");
+INSERT INTO Shoes VALUES(1004, 'The Elusive', 56.78, 89.99, 'Rads', 'Other', 'Blue', 'Male', "rads.jpg");
+INSERT INTO Shoes VALUES(1005, 'SuperSpeed 2000', 56.78, 89.99, 'Nike', 'Running', 'White', 'Male', "nike.jpg");
 
 INSERT INTO Inventory VALUES(10001, 1001, 9, 10);
 INSERT INTO Inventory VALUES(10002, 1001, 10, 13);

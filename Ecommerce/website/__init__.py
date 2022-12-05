@@ -211,8 +211,28 @@ def create_app():
 
     def userShoeSearch(brand, type, color, sex):
         cursor = mysql.connection.cursor()
-        cursor.execute('SELECT DISTINCT Shoes.ShoeID, ShoeName, CustPrice, Brand, ShoeType, Color, Gender, PicturePath FROM Shoes, Inventory WHERE Shoes.ShoeID = Inventory.ShoeID AND Brand = % s AND ShoeType = % s AND Color = % s AND Gender = % s' , (brand, type, color, sex,  ))
-        shoeSearch = cursor.fetchall()
+        if brand != None and type != None and color != None and sex != None: 
+            cursor.execute('SELECT DISTINCT Shoes.ShoeID, ShoeName, CustPrice, Brand, ShoeType, Color, Gender, PicturePath FROM Shoes, Inventory WHERE Shoes.ShoeID = Inventory.ShoeID AND Brand = % s AND ShoeType = % s AND Color = % s AND Gender = % s' , (brand, type, color, sex,  ))
+            shoeSearch = cursor.fetchall()
+
+        elif brand != None and type == None and color == None and sex == None:
+            cursor.execute('SELECT DISTINCT Shoes.ShoeID, ShoeName, CustPrice, Brand, ShoeType, Color, Gender, PicturePath FROM Shoes, Inventory WHERE Shoes.ShoeID = Inventory.ShoeID AND Brand = % s' , (brand, ))
+            shoeSearch = cursor.fetchall()
+
+        elif brand == None and type != None and color == None and sex == None:
+            cursor.execute('SELECT DISTINCT Shoes.ShoeID, ShoeName, CustPrice, Brand, ShoeType, Color, Gender, PicturePath FROM Shoes, Inventory WHERE Shoes.ShoeID = Inventory.ShoeID AND ShoeType = % s' , (type, ))
+            shoeSearch = cursor.fetchall()
+
+        elif brand == None and type == None and color != None and sex == None:
+            cursor.execute('SELECT DISTINCT Shoes.ShoeID, ShoeName, CustPrice, Brand, ShoeType, Color, Gender, PicturePath FROM Shoes, Inventory WHERE Shoes.ShoeID = Inventory.ShoeID AND Color = % s' , (color, ))
+            shoeSearch = cursor.fetchall()
+
+        elif brand == None and type == None and color == None and sex != None:
+            cursor.execute('SELECT DISTINCT Shoes.ShoeID, ShoeName, CustPrice, Brand, ShoeType, Color, Gender, PicturePath FROM Shoes, Inventory WHERE Shoes.ShoeID = Inventory.ShoeID AND Gender = % s' , (sex, ))
+            shoeSearch = cursor.fetchall()
+
+        else:
+            print("Did not work")
         for shoe in shoeSearch:
             print(shoe)
         return shoeSearch
