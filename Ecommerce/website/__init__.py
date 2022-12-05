@@ -154,6 +154,11 @@ def create_app():
                 formColor = request.form.get("color")
                 formSex = request.form.get("sex")
 
+                print(formBrand)
+                print(formType)
+                print(formColor)
+                print(formSex)
+
                 searchShoeList = userShoeSearch(brand=formBrand, type=formType, color=formColor, sex=formSex)
                 print("After function call") 
                 return render_template("ecommerce.html", username = session['firstName'], id = session['id'], sendList = searchShoeList)
@@ -205,12 +210,11 @@ def create_app():
         return allShoes
 
     def userShoeSearch(brand, type, color, sex):
-        #cursor.execute('SELECT * FROM Customer WHERE email = % s', (iemail, ))
         cursor = mysql.connection.cursor()
         cursor.execute('SELECT DISTINCT Shoes.ShoeID, ShoeName, CustPrice, Brand, ShoeType, Color, Gender, PicturePath FROM Shoes, Inventory WHERE Shoes.ShoeID = Inventory.ShoeID AND Brand = % s AND ShoeType = % s AND Color = % s AND Gender = % s' , (brand, type, color, sex,  ))
         shoeSearch = cursor.fetchall()
         for shoe in shoeSearch:
             print(shoe)
-        pass
+        return shoeSearch
 
     return app
