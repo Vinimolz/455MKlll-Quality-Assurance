@@ -151,7 +151,7 @@ section{
 .box .AddForm{
     background-color: #ffffff;
 }
-.box label{
+.box .viewBtn{
     border-color: transparent;
     background-color: #ffffff;
     color: #45424b;
@@ -163,7 +163,7 @@ section{
     transition: all .3s ease;
     border-radius: 15px;
 }
-.box label:hover{
+.box .viewBtn:hover{
     background: #49a4dc;
     border-radius: 15px;
     color: #fff

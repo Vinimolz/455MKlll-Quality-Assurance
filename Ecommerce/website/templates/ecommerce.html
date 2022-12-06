@@ -41,21 +41,26 @@
                     <h5>{{shoe[1]}}</h5>
                     <h6>US$ </US1>{{shoe[2]}}</h6>
                     <div class="cart">
-                        <a href="#"><i class='bx bx-cart-add' ></i></a>
+                        <a href="/testroute/{{shoe[0]}}"><i class='bx bx-cart-add' ></i></a>
                     </div>
                     <br>
-                    <div class="AddForm">
+                    <a class="viewBtn" href="/testroute/{{shoe[0]}}">View Model</a>
+                    <!--
+                        <div class="AddForm">
                         <form method="POST"></form>
                             <input class="cartInput" type="input" value={{sendList[item]}} name="id" id="addToCart">
+                            <a href="/testroute/{{shoe[0]}}">View Model</a>
                             <label class="viewBtn">View Model</label>
                         </form>
-                    </div>                   
+                    </div>
+                    -->                   
                     <!--
                     <button
                         data-product="{{sendList[item]}}"
                         data-action="add" 
                         class="btn btn-outline-secondary add-btn update-cart">Add To Cart
-                    </button>-->
+                    </button>
+                    -->
                 </div>
             {% endfor %}
         </div>        
