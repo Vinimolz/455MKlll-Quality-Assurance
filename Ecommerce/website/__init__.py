@@ -163,7 +163,7 @@ def create_app():
                 print("After function call") 
                 return render_template("ecommerce.html", username = session['firstName'], id = session['id'], sendList = searchShoeList)
 
-#------------------------------- Single Model view Page -----------------------------------------------------
+     #--------------------------------------- Single Model view Page ----------------------------------------------
     @app.route('/ecommerce/modelview/<int:shoeid>')
     def testingroute(shoeid):
         #Query to fetch inventory info using shoeid
@@ -179,7 +179,7 @@ def create_app():
         inventory = InventoryInfo, 
         shoe = ShoeInfo)
 
-#-------------------------------- This will be our future cart page --------------------------------------
+     #------------------------------------ This will be our future cart page --------------------------------------
     @app.route('/ecommerce/cart')
     def cart():
         try:
@@ -204,12 +204,12 @@ def create_app():
             username = session['firstName'], 
             user_id = session['id'])
 
-    #------ This will be our recover password page that will most likely not be fully implemented--------
+    #---------- This will be our recover password page that will most likely not be fully implemented--------
     @app.route('/recoverpasswd', methods=['GET', 'POST'])
     def recoverpasswd():
         return render_template("recoverpasswd.html")
 
-    #---------- This will be our contact page that will most likely not be fully implemented--------------
+    #-------------- This will be our contact page that will most likely not be fully implemented--------------
     @app.route('/ContactUs')
     def contact():
         return render_template("aboutUs.html")

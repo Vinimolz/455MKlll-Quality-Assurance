@@ -44,12 +44,12 @@
                     <form method="POST">
                         <select name="sizeselector" id="">
                             <option value="">Select A Size</option>
-                            <option value="">XXL</option>
-                            <option value="">XL</option>
-                            <option value="">Large</option>
+                            {% for shoe in inventory %}
+                                <option name="size" value="{{shoe[2]}}">{{shoe[2]}}</option>
+                            {% endfor %}
                         </select>
                         
-                        Quantity: <input type="number" value="1"> 
+                        Quantity: <input type="number" value="1" name="quantity"> 
 
                         <div class="inputBtn">
                             <a href="" class="btn">Add To Cart</a>
