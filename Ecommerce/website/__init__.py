@@ -166,15 +166,18 @@ def create_app():
 #------------------------------- Single Model view Page -----------------------------------------------------
     @app.route('/ecommerce/modelview/<int:shoeid>')
     def testingroute(shoeid):
-        #Query to fetch shoe info from inventory by ShoeID and InventoryID
+        #Query to fetch inventory info using shoeid
         InventoryInfo = fetchInfoFromInventory(shoeid)
+        #Query to fetch Shoe info 
         ShoeInfo = fetchShoeInfo(shoeid)
         for i in InventoryInfo:
             print(i)
         
         print(ShoeInfo)
         #Query to add shoe to cart if user is loggedin
-        return render_template("modelview.html", sendID = shoeid)
+        return render_template("modelview.html", 
+        inventory = InventoryInfo, 
+        shoe = ShoeInfo)
 
 #-------------------------------- This will be our future cart page --------------------------------------
     @app.route('/ecommerce/cart')

@@ -98,11 +98,15 @@ header{
 .col-2{
     float: left;
     margin: 20px;
+    width:40%;
+    height:auto;
 }
 
 .col-2 img{
     border-radius: 15px;
     border: 2px solid #000000;
+    width:100%;
+    height:auto;
 }
 
 .right-text{
@@ -141,8 +145,8 @@ header{
 }
 
 .inputBtn{
-    margin-top: 50px;
-    margin-bottom: 50px;
+    margin-top: 40px;
+    margin-bottom: 40px;
 }
 
 .inputBtn a{

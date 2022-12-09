@@ -33,14 +33,14 @@
     <div class="small-container">
         <div class="row">
             <div class="col-2">
-                <img src="{{ url_for('static', filename='images/volitionLogo.png')}}"/>
+                <img src="{{ url_for('static', filename='images/' + shoe[8])}}"/>
             </div>
             <div class="col-2">
                 <div class="right-text">
                     <p>Ecommerce / Model</p>
-                    <h1>Shoe Name Goes Here</h1>
+                    <h1>{{shoe[1]}}</h1>
                     <hr>
-                    <h4>Shoe Price: US$ 99.99</h4>
+                    <h4>Shoe Price: US$ {{shoe[3]}}</h4>
                     <form method="POST">
                         <select name="sizeselector" id="">
                             <option value="">Select A Size</option>
@@ -50,7 +50,7 @@
                         </select>
                         
                         Quantity: <input type="number" value="1"> 
-                        
+
                         <div class="inputBtn">
                             <a href="" class="btn">Add To Cart</a>
                         </div>
