@@ -29,7 +29,7 @@ header{
     right: 0;
     z-index: 1000;
     text-decoration: none;
-    position: fixed;
+    position: relative;
     background-color: #f1f8fc;
     -moz-box-shadow: 10px 10px 5px rgb(103, 103, 103);
     -webkit-box-shadow: 10px 10px 5px rgb(103, 103, 103);
@@ -89,4 +89,76 @@ header{
     color: transparent;
     background-color: transparent;
     border-color: transparent;
+}
+
+.small-container{
+    margin-top: 40px;
+    margin-left: 90px;
+}
+.col-2{
+    float: left;
+    margin: 20px;
+}
+
+.col-2 img{
+    border-radius: 15px;
+    border: 2px solid #000000;
+}
+
+.right-text{
+    margin-top:20px;
+    margin-left: 10px;
+    width: 500px;
+    max-width: 500px;
+}
+
+.right-text hr{
+    border: 0;
+    border-top: 1px solid #000000;
+    margin-bottom: 30px;
+}
+
+.right-text h1{
+    margin-bottom: 3px;
+   
+}
+
+.right-text h4{
+    margin-bottom: 20px;
+}
+.right-text select{
+    margin-right: 50px;
+    border-radius: 10px;
+    font-size: 14px;
+}
+.right-text input{
+    margin-right: 50px;
+    margin-left: 5px;
+    border-radius: 10px;
+    width: 50px;
+    border-width: 1px;
+    text-align: center;
+}
+
+.inputBtn{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.inputBtn a{
+    border-color: transparent;
+    background-color: #69b9eb;
+    color: #fff;
+    text-align: center;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 8px;
+    width: 150x;
+    transition: all .3s ease;
+    border-radius: 15px;
+}
+.inputBtn a:hover{
+    background: #3586b9;
+    border-radius: 15px;
+    color: #fff
 }

@@ -23,11 +23,45 @@
             <li><a href="/testimonials">Testimonials</a></li>
         </ul>
 
-        <div class="icons">
-            
+        <div class="icons">            
             <!--<a href="#"><i class='bx bx-search-alt-2' ></i></a>-->
             <a href="/ecommerce/cart"><i class='bx bx-cart' ></i></a>
             <a href="/ecommerce/profile"><i class='bx bxs-user-account'></i></a>
             <a href="/logout"><i class='bx bx-log-out bx-flip-horizontal' ></i></a>
         </div>
     </header>
+    <div class="small-container">
+        <div class="row">
+            <div class="col-2">
+                <img src="{{ url_for('static', filename='images/volitionLogo.png')}}"/>
+            </div>
+            <div class="col-2">
+                <div class="right-text">
+                    <p>Ecommerce / Model</p>
+                    <h1>Shoe Name Goes Here</h1>
+                    <hr>
+                    <h4>Shoe Price: US$ 99.99</h4>
+                    <form method="POST">
+                        <select name="sizeselector" id="">
+                            <option value="">Select A Size</option>
+                            <option value="">XXL</option>
+                            <option value="">XL</option>
+                            <option value="">Large</option>
+                        </select>
+                        
+                        Quantity: <input type="number" value="1"> 
+                        
+                        <div class="inputBtn">
+                            <a href="" class="btn">Add To Cart</a>
+                        </div>
+                    </form>
+
+                    <h4>Product Description:</h4>
+                    <p>A shoe is an item of footwear intended to protect and comfort the human foot.
+                        They are often worn with a sock. Shoes are also used as an item of decoration and fashion.
+                        The design of shoes has varied enormously through time and from culture to culture,
+                        with form originally being tied to function</p>
+                </div>
+            </div>
+        </div>
+    </div>
