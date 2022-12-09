@@ -163,6 +163,12 @@ def create_app():
                 print("After function call") 
                 return render_template("ecommerce.html", username = session['firstName'], id = session['id'], sendList = searchShoeList)
 
+#------------------------------- Single Model view Page -----------------------------------------------------
+    @app.route('/modelview/<int:shoeid>')
+    def testingroute(shoeid):
+        #Query to fetch shoe by ID using shoeid
+        return render_template("modelview.html", sendID = shoeid)
+
 #-------------------------------- This will be our future cart page --------------------------------------
     @app.route('/ecommerce/cart')
     def cart():
@@ -180,10 +186,6 @@ def create_app():
             flash("Something went wrong :'(", category='error')
             return redirect(url_for('ecommerce'))
 
-    @app.route('/modelview/<int:shoeid>')
-    def testingroute(shoeid):
-        print(shoeid)
-        return render_template("modelview.html", sendID = shoeid)
     #-------------------------------- This will be our future profile page ----------------------------
     @app.route('/ecommerce/profile')
     @login_required
@@ -192,18 +194,18 @@ def create_app():
             username = session['firstName'], 
             user_id = session['id'])
 
-    # This will be our recover password page that will most likely not be fully implemented
+    #------ This will be our recover password page that will most likely not be fully implemented--------
     @app.route('/recoverpasswd', methods=['GET', 'POST'])
     def recoverpasswd():
         return render_template("recoverpasswd.html")
 
+    #---------- This will be our contact page that will most likely not be fully implemented--------------
     @app.route('/ContactUs')
     def contact():
         return render_template("aboutUs.html")
 
-    def testList():
-        list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
-        return list
+    def fetchSingleModel(shoeId):
+        pass
 
     def fetchAllShoes():
         cursor = mysql.connection.cursor()
