@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/modelview.css')}}" />
+
+    <!-- This is the link for incons -->
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <script type="text/javascript">
+        var user = '{{username}}'
+    </script>
+    <title>Nodel View</title>
+</head>
+<body>
+    <header>
+        <a href="/landpage" id="navbar_logo">Volition<span id="blueLogo">VL</span></a>
+
+        <ul class="navbar">
+            <li><a href="/ecommerce">Shop Now</a></li>
+            <li><a href="/aboutUs">About Us</a></li>
+            <li><a href="/testimonials">Testimonials</a></li>
+        </ul>
+
+        <div class="icons">
+            
+            <!--<a href="#"><i class='bx bx-search-alt-2' ></i></a>-->
+            <a href="/ecommerce/cart"><i class='bx bx-cart' ></i></a>
+            <a href="/ecommerce/profile"><i class='bx bxs-user-account'></i></a>
+            <a href="/logout"><i class='bx bx-log-out bx-flip-horizontal' ></i></a>
+        </div>
+    </header>

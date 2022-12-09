@@ -180,10 +180,10 @@ def create_app():
             flash("Something went wrong :'(", category='error')
             return redirect(url_for('ecommerce'))
 
-    @app.route('/testroute/<int:shoeid>')
+    @app.route('/modelview/<int:shoeid>')
     def testingroute(shoeid):
         print(shoeid)
-        return render_template("testfile.html", sendID = shoeid)
+        return render_template("modelview.html", sendID = shoeid)
     #-------------------------------- This will be our future profile page ----------------------------
     @app.route('/ecommerce/profile')
     @login_required
