@@ -164,9 +164,16 @@ def create_app():
                 return render_template("ecommerce.html", username = session['firstName'], id = session['id'], sendList = searchShoeList)
 
 #------------------------------- Single Model view Page -----------------------------------------------------
-    @app.route('/modelview/<int:shoeid>')
+    @app.route('/ecommerce/modelview/<int:shoeid>')
     def testingroute(shoeid):
-        #Query to fetch shoe by ID using shoeid
+        #Query to fetch shoe info from inventory by ShoeID and InventoryID
+        InventoryInfo = fetchInfoFromInventory(shoeid)
+        ShoeInfo = fetchShoeInfo(shoeid)
+        for i in InventoryInfo:
+            print(i)
+        
+        print(ShoeInfo)
+        #Query to add shoe to cart if user is loggedin
         return render_template("modelview.html", sendID = shoeid)
 
 #-------------------------------- This will be our future cart page --------------------------------------
@@ -204,8 +211,25 @@ def create_app():
     def contact():
         return render_template("aboutUs.html")
 
-    def fetchSingleModel(shoeId):
-        pass
+    def fetchInfoFromInventory(shoeId):
+        try:
+            cursor = mysql.connection.cursor()
+            cursor.execute('SET @element = % s' , (shoeId, ))
+            cursor.execute('SELECT * FROM Inventory WHERE ShoeID = @element')
+            InventoryInfo = cursor.fetchall()
+        except:
+            print("Problem with fetchInfoFromInventory function")
+        return InventoryInfo
+
+    def fetchShoeInfo(shoeId):
+        try:
+            cursor = mysql.connection.cursor()
+            cursor.execute('SET @element = % s' , (shoeId, ))
+            cursor.execute('SELECT * FROM Shoes WHERE ShoeID = @element')
+            shoe = cursor.fetchone()
+        except:
+            print("Problem with fetchShoeInfo function")
+        return shoe
 
     def fetchAllShoes():
         cursor = mysql.connection.cursor()
