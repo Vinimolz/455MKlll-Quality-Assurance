@@ -4,9 +4,53 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cart</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cart.css')}}" />
+
+    <!-- This is the link for incons -->
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <script type="text/javascript">
+        var user = '{{username}}'
+    </script>
+    <title>Volition</title>
 </head>
 <body>
-    <h1>Hello, {{username}}!!! This will be your future cart</h1>
-</body>
-</html>
+    <header>
+        <a href="/landpage" id="navbar_logo">Volition<span id="blueLogo">VL</span></a>
+
+        <ul class="navbar">
+            <li><a href="/ecommerce">Shop Now</a></li>
+            <li><a href="/aboutUs">About Us</a></li>
+            <li><a href="/testimonials">Testimonials</a></li>
+        </ul>
+
+        <div class="icons">            
+            <!--<a href="#"><i class='bx bx-search-alt-2' ></i></a>-->
+            <a href="/ecommerce/cart"><i class='bx bx-cart' ></i></a>
+            <a href="/ecommerce/profile"><i class='bx bxs-user-account'></i></a>
+            <a href="/logout"><i class='bx bx-log-out bx-flip-horizontal' ></i></a>
+        </div>
+    </header>
+    <div class="cart-header">
+        <h3>Product</h3>
+        <h3>Quantity</h3>
+        <h3>Subtotal</h3>
+    </div>
+    <section class="main-body">
+        <div class="cart-content">
+            <div class="product">
+                <div class="image">
+                    <img src="{{ url_for('static', filename='images/hokas.jpg')}}" alt="">
+                </div> 
+                <div class="text"> 
+                    <h5>Product Name goes here</h5>
+                    <h6>US$: 99.99</h6>   
+                </div>      
+            </div>
+            <div class="quantity">
+                <input type="number" value="1" name="quantity"> 
+            </div>
+            <div class="subtotal">
+                <p>US$ 99.99</p>
+            </div>
+        </div>
+    </section>

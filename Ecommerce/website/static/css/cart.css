@@ -1,0 +1,151 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+    background-color: #f1f8fc;
+    text-decoration: none;
+    list-style: none;
+    scroll-behavior: smooth;
+}
+
+:root{
+    --bg-color: #f1f8fc;
+    --text-color: #45424b;
+    --main-font: 2.2rem;
+    --p-font: 1.1rem;
+}
+
+body{
+    background: var(--bg-color);
+    color: var(--text-color);
+}
+
+header{
+    width: 100%;
+    top: 0;
+    right: 0;
+    z-index: 1000;
+    text-decoration: none;
+    position: relative;
+    background-color: #f1f8fc;
+    -moz-box-shadow: 10px 10px 5px rgb(103, 103, 103);
+    -webkit-box-shadow: 10px 10px 5px rgb(103, 103, 103);
+    box-shadow: 10px 10px 5px rgb(103, 103, 103);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 25px 8%;
+    transition: 0.3s;
+}
+
+#navbar_logo{
+    margin-top: .2 rem;
+    text-decoration: none;
+    padding:0.5em;
+    color: #45424b;
+    font-size: 1.2rem;
+    font-weight: 700;    
+}
+
+#blueLogo{
+    color: #49a4dc;
+    font-size: 1.5rem;    
+    font-weight: 700;
+}
+
+.navbar{
+    display: flex;
+}
+.navbar a{
+    font-size: var(--p-font);
+    color: var(--text-color);
+    font-weight: 600;
+    padding: 10px 15px;
+    margin: 0 10px;
+    border-radius: 15px;
+    transition: all .3s ease;
+}
+.navbar a:hover{
+    background: #49a4dc;
+    border-radius: 15px;
+    color: #fff
+}
+.icons{
+    display: inline-block;
+}
+.icons i{
+    color: var(--text-color);
+    font-size: 24px;
+    margin-left: 15px;
+}
+.icons i:hover{
+    opacity: .7;
+}
+.icons .bx-cart{
+    opacity: .7;
+}
+.icons button{
+    color: transparent;
+    background-color: transparent;
+    border-color: transparent;
+}
+.cart-header{
+    width: 90%;
+    
+    display: flex;
+    margin-top: 50px;
+    margin-left: 50px;
+    margin-right: 50px;
+    justify-content: space-between;
+    background-color: #49a4dc;
+    border-radius: 10px;
+
+}
+.cart-header h3{
+    display: inline-block;
+    margin: 15px;
+    background-color: #49a4dc;
+    color: #fff;
+    font-weight: 400;
+}
+.main-body{
+    width: 90%;
+    display: flex;
+    margin-top: 5px;
+    margin-left: 50px;
+    margin-right: 50px;
+    justify-content: space-between;
+    border-radius: 10px;
+    border: 1px solid #45424b;    
+}
+.cart-content{
+    margin: 10px;
+    width: 100%;
+    display: flex;
+    border-radius: 10px;
+    justify-content: space-between;
+    
+    
+}
+.product{
+    display: flex;
+    width: 350px;
+    height: 75px;
+    
+}
+.image{
+    max-width: 100%;
+    height: 75px;    
+}
+img{
+    height: 75px;
+}
+.text{
+    margin-left: 5px;
+    margin-top: 10px;
+}
+
+

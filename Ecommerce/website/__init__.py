@@ -174,10 +174,11 @@ def create_app():
             print(i)
         
         print(ShoeInfo)
-        #Query to add shoe to cart if user is loggedin
-        return render_template("modelview.html", 
-        inventory = InventoryInfo, 
-        shoe = ShoeInfo)
+
+        #Query to add shoe to cart db if user is loggedin or store in temporary data structure
+        #This will most likely use the shoeId
+
+        return render_template("modelview.html", inventory = InventoryInfo, shoe = ShoeInfo)
 
      #------------------------------------ This will be our future cart page --------------------------------------
     @app.route('/ecommerce/cart')
