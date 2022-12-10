@@ -35,6 +35,7 @@
         <h3>Quantity</h3>
         <h3>Subtotal</h3>
     </div>
+    <!-- Start For loop here-->
     <section class="main-body">
         <div class="cart-content">
             <div class="product">
@@ -43,7 +44,8 @@
                 </div> 
                 <div class="text"> 
                     <h5>Product Name goes here</h5>
-                    <h6>US$: 99.99</h6>   
+                    <h6>US$: 99.99</h6>
+                    <button><i class='bx bx-trash'></i></button>   
                 </div>      
             </div>
             <div class="quantity">
@@ -51,6 +53,26 @@
             </div>
             <div class="subtotal">
                 <p>US$ 99.99</p>
-            </div>
+            </div>            
         </div>
     </section>
+    <!-- End For loop here -->
+    <div class="total-price">
+        <table>
+            <tr>
+                <td>Subtotal</td>
+                <td>$99.99</td>
+            </tr>
+            <tr>
+                <td>Tax & Fees</td>
+                <td>$12.99</td>
+            </tr>
+            <tr>
+                <td>Grand Total</td>
+                <td>$112.88</td>
+            </tr>             
+        </table>
+    </div>
+    <div class="checkout">
+        <a class="viewBtn" href="">Checkout ></a>
+    </div>

@@ -126,15 +126,12 @@ header{
     width: 100%;
     display: flex;
     border-radius: 10px;
-    justify-content: space-between;
-    
-    
+    justify-content: space-between;   
 }
 .product{
     display: flex;
     width: 350px;
-    height: 75px;
-    
+    height: 75px;    
 }
 .image{
     max-width: 100%;
@@ -147,5 +144,74 @@ img{
     margin-left: 5px;
     margin-top: 10px;
 }
+.text button{
+    color: transparent;
+    background-color: transparent;
+    border-color: transparent;
+}
+.text h5{
+    margin-bottom: 5px;
+    margin-left: 5px;
+}
+.text h6{
+    margin-bottom: 3px;
+    margin-left: 5px;
+}
+.text i{
+    color: var(--text-color);
+    font-size: 18px;
+    transition: all .6s ease;
+    cursor: pointer;
+    
+}
+.text i:hover{
+    color: rgb(201, 1, 1);
+    transform: scale(1.1);
+    
+}
+.quantity{
+    width: 50px;
+}
 
+.total-price{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+    margin-right: 65px;
+}
+.total-price table{
+    border-top: 3px solid #49a4dc;
+    margin: 20px;
+    width: 70%;
+    max-width: 350px;
 
+}
+.total-price td:last-child{
+    text-align: right;
+}
+
+.checkout{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+    margin-right: 85px;
+}
+.checkout .viewBtn{
+    border-color: transparent;
+    background-color: #49a4dc;
+    color: #fff;
+    text-align: center;
+    font-weight: 600s;
+    cursor: pointer;
+    padding: 5px;
+    width: 150x;
+    transition: all .3s ease;
+    border-radius: 10px;
+    transition: all 0.3 ease;
+}
+.checkout .viewBtn:hover{
+    background: #49a4dc;
+    border-radius: 10px;
+    color: #fff;
+    transform: scale(1.1);
+}

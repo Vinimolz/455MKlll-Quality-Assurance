@@ -149,7 +149,7 @@ header{
     margin-bottom: 40px;
 }
 
-.inputBtn a{
+.inputBtn .btn{
     border-color: transparent;
     background-color: #69b9eb;
     color: #fff;
@@ -158,11 +158,11 @@ header{
     cursor: pointer;
     padding: 8px;
     width: 150x;
-    transition: all .3s ease;
-    border-radius: 15px;
+    transition: all 0.3 ease;
+    border-radius: 10px;
 }
-.inputBtn a:hover{
+.inputBtn .btn:hover{
     background: #3586b9;
-    border-radius: 15px;
+    border-radius: 10px;
     color: #fff
 }
