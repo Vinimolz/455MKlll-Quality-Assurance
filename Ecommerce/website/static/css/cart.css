@@ -93,10 +93,9 @@ header{
     border-color: transparent;
 }
 .cart-header{
-    width: 90%;
-    
+    width: 90%;    
     display: flex;
-    margin-top: 50px;
+    margin-top: 35px;
     margin-left: 50px;
     margin-right: 50px;
     justify-content: space-between;
@@ -195,6 +194,7 @@ img{
     justify-content: flex-end;
     margin-top: 20px;
     margin-right: 85px;
+    margin-bottom: 50px;
 }
 .checkout .viewBtn{
     border-color: transparent;
