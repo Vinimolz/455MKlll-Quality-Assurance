@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/checkout.css')}}" />
+    
+
+    <!-- This is the link for incons -->
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <script type="text/javascript">
+        var user = '{{username}}'
+    </script>
+    <title>Ecommerce</title>
+</head>
+<body>
+    <header>
+        <a href="/landpage" id="navbar_logo">Volition<span id="blueLogo">VL</span></a>
+
+        <ul class="navbar">
+            <li><a href="/ecommerce">Shop Now</a></li>
+            <li><a href="/aboutUs">About Us</a></li>
+            <li><a href="/testimonials">Testimonials</a></li>
+        </ul>
+
+        <div class="icons">
+            <!--<a href="#"><i class='bx bx-search-alt-2' ></i></a>-->
+            <a href="/ecommerce/cart"><i class='bx bx-cart' ></i></a>
+            <a href="/ecommerce/profile"><i class='bx bxs-user-account'></i></a>
+            <a href="/logout"><i class='bx bx-log-out bx-flip-horizontal' ></i></a>
+        </div>
+    </header>
+    <section>
+        <div class="right">
+            <div class="payment">
+                <h2>Payment Information:</h2>
+            </div>
+            <div class="address">
+                <h2>Shipping address:</h2>
+            </div>
+        </div>
+        <div class="summary">
+            <h2>Purchase items:</h2>
+            <!--For loop starts here-->
+            <div class="summary-item">
+                <div class="summary-item-image">
+                    <img src="{{ url_for('static', filename='images/hokas.jpg')}}" alt="">
+                </div>
+                <div class="summary-item-info">
+                    <h5>Hokas Running</h5>
+                    <h5>US$ 99.99</h5>
+                </div>
+            </div>
+            <div class="summary-item">
+                <div class="summary-item-image">
+                    <img src="{{ url_for('static', filename='images/nike1.jpg')}}" alt="">
+                </div>
+                <div class="summary-item-info">
+                    <h5>Nikes Running</h5>
+                    <h5>US$ 99.99</h5>
+                </div>
+            </div>
+            <div class="summary-item">
+                <div class="summary-item-image">
+                    <img src="{{ url_for('static', filename='images/adidas.jpg')}}" alt="">
+                </div>
+                <div class="summary-item-info">
+                    <h5>Adidas Lifting</h5>
+                    <h5>US$ 99.99</h5>
+                </div>
+            </div>
+            <!--For loop ends here-->
+            <h2>Purchase Summary:</h2>
+            <div class="order-summary">
+                <table>
+                    <tr>
+                        <td>items(3): </td>
+                        <td>$224.89</td>
+                    </tr>
+                    <tr>
+                        <td>Shipping: </td>
+                        <td>$2.99</td>
+                    </tr>
+                    <tr>
+                        <td>Total Before tax: </td>
+                        <td>$227.88</td>
+                    </tr>
+                    <tr>
+                        <td>Tax & Fees: </td>
+                        <td>$23.88</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="order-total">
+                <h4>Order total:</h4>
+                <span>$253.99</span>
+            </div>
+        </div>
+    </section>
+
+</body>

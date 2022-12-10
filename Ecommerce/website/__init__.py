@@ -197,6 +197,10 @@ def create_app():
             flash("Something went wrong :'(", category='error')
             return redirect(url_for('ecommerce'))
 
+    @app.route('/ecommerce/checkout')
+    def checkout():
+        return render_template("checkout.html")
+
     #-------------------------------- This will be our future profile page ----------------------------
     @app.route('/ecommerce/profile')
     @login_required
