@@ -35,9 +35,45 @@
         <div class="right">
             <div class="payment">
                 <h2>Payment Information:</h2>
+                <form action="" class="checkout-form">
+                    <div class="input-line">
+                        <label for="name">Name on card:</label>
+                        <input type="text" name="name" id="name" placeholder="Name on card">
+                    </div> 
+                    <div class="input-line">
+                        <label for="card">Card number:</label>
+                        <input type="text" name="card" id="card" placeholder="1111-1111-1111-1111">
+                    </div>
+                    <div class="input-line">
+                        <label for="date">Expiration Date:</label>
+                        <input type="text" name="date" id="date" placeholder="11-27">
+                    </div>
+                    <div class="input-line">
+                        <label for="cvc">CVC:</label>
+                        <input type="text" name="cvc" id="cvc" placeholder="***">
+                    </div>
+                </form>
             </div>
             <div class="address">
                 <h2>Shipping address:</h2>
+                <form action="" class="checkout-form">
+                    <div class="input-line">
+                        <label for="addree1">Address 1:</label>
+                        <input type="text" name="address1" id="address1">
+                    </div> 
+                    <div class="input-line">
+                        <label for="address2">Address 2:</label>
+                        <input type="text" name="address2" id="address2" placeholder="">
+                    </div>
+                    <div class="input-line">
+                        <label for="zip">Zip Code:</label>
+                        <input type="text" name="zip" id="zip">
+                    </div>
+                    <div class="input-line">
+                        <label for="state">State:</label>
+                        <input type="text" name="state" id="state">
+                    </div>
+                </form>
             </div>
         </div>
         <div class="summary">
@@ -48,17 +84,8 @@
                     <img src="{{ url_for('static', filename='images/hokas.jpg')}}" alt="">
                 </div>
                 <div class="summary-item-info">
-                    <h5>Hokas Running</h5>
-                    <h5>US$ 99.99</h5>
-                </div>
-            </div>
-            <div class="summary-item">
-                <div class="summary-item-image">
-                    <img src="{{ url_for('static', filename='images/nike1.jpg')}}" alt="">
-                </div>
-                <div class="summary-item-info">
-                    <h5>Nikes Running</h5>
-                    <h5>US$ 99.99</h5>
+                    <h5>The Charger</h5>
+                    <h5>US$ 56.99</h5>
                 </div>
             </div>
             <div class="summary-item">
@@ -66,7 +93,16 @@
                     <img src="{{ url_for('static', filename='images/adidas.jpg')}}" alt="">
                 </div>
                 <div class="summary-item-info">
-                    <h5>Adidas Lifting</h5>
+                    <h5>Fast Girl</h5>
+                    <h5>US$ 74.99</h5>
+                </div>
+            </div>
+            <div class="summary-item">
+                <div class="summary-item-image">
+                    <img src="{{ url_for('static', filename='images/nike1.jpg')}}" alt="">
+                </div>
+                <div class="summary-item-info">
+                    <h5>SuperSpeed 1000</h5>
                     <h5>US$ 99.99</h5>
                 </div>
             </div>
@@ -76,7 +112,7 @@
                 <table>
                     <tr>
                         <td>items(3): </td>
-                        <td>$224.89</td>
+                        <td>$231.97</td>
                     </tr>
                     <tr>
                         <td>Shipping: </td>
@@ -84,7 +120,7 @@
                     </tr>
                     <tr>
                         <td>Total Before tax: </td>
-                        <td>$227.88</td>
+                        <td>$234.96</td>
                     </tr>
                     <tr>
                         <td>Tax & Fees: </td>
@@ -93,8 +129,15 @@
                 </table>
             </div>
             <div class="order-total">
-                <h4>Order total:</h4>
-                <span>$253.99</span>
+                <table>
+                    <tr>
+                        <td>Order total:</td>
+                        <td>$258.84</td>
+                    </tr>
+                </table>                
+            </div>
+            <div class="place-order">
+                <a class="place-order-btn" href="/ecommerce">Place order</a>
             </div>
         </div>
     </section>

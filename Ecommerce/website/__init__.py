@@ -101,7 +101,7 @@ def create_app():
                     session['id'] = account_info[0]
                     session['firstName'] = account_info[1]
                     
-                    flash('You are logged in!', category='sucess')
+                    #flash('You are logged in!', category='sucess')
                     print('Loggin sucessful')
                     return redirect(url_for('ecommerce'))
 

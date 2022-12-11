@@ -125,11 +125,11 @@ header{
     width: 100%;
     display: flex;
     border-radius: 10px;
-    justify-content: space-between;   
+    justify-content: left;   
 }
 .product{
     display: flex;
-    width: 350px;
+    width:500px;
     height: 75px;    
 }
 .image{
@@ -169,7 +169,11 @@ img{
     
 }
 .quantity{
-    width: 50px;
+    width: 25px;
+    margin-right: 200px;
+}
+.subtotal{
+    margin-left: 300px;
 }
 
 .total-price{
