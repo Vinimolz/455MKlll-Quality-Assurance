@@ -13,14 +13,14 @@ INSERT INTO Inventory VALUES(10006, 1002, 4.5, 3);
 INSERT INTO Inventory VALUES(10007, 1004, 10, 10);
 INSERT INTO Inventory VALUES(10008, 1005, 12, 8);
 
--- INSERT INTO Customer VALUES(1, 'Luke', 'Smith', 'csluke@outlook.com', '1234');
--- INSERT INTO Customer VALUES(2, 'Vini', 'Molz', 'vinimolz@gmail.com', '1234');
--- INSERT INTO Customer VALUES(3, 'Donald', 'Trump', 'iamFamous@me.com', '1234');
-
 -- these need to be updated
 -- INSERT INTO CartItem VALUES(1, 10001, 1 );
 -- INSERT INTO CartItem VALUES(1, 10002, 1 );
 -- INSERT INTO CartItem VALUES(2, 10001, 3 );
+
+-- INSERT INTO Customer VALUES(1, 'Luke', 'Smith', 'csluke@outlook.com', '1234');
+-- INSERT INTO Customer VALUES(2, 'Vini', 'Molz', 'vinimolz@gmail.com', '1234');
+-- INSERT INTO Customer VALUES(3, 'Donald', 'Trump', 'iamFamous@me.com', '1234');
 
 
 -- INSERT INTO Guest VALUES(1, 'idontknow@gmail.com');

@@ -9,6 +9,8 @@ from website import auth_functions
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'CSSE490'
+    app.config['ENV'] = 'development'
+
     app.config['MYSQL_HOST'] = 'localhost'
     app.config['MYSQL_USER'] = 'root'
     app.config['MYSQL_PASSWORD'] = ''
@@ -133,6 +135,7 @@ def create_app():
     def ecommerce():
         try:            
             if session['loggedin']:
+                print("Hello!!!!!!!!!")
                 shoeList = fetchAllShoes()
                 return render_template("ecommerce.html", username = session['firstName'], id = session['id'], sendList = shoeList)
             else:
@@ -165,7 +168,8 @@ def create_app():
 
      #--------------------------------------- Single Model view Page ----------------------------------------------
     @app.route('/ecommerce/modelview/<int:shoeid>')
-    def testingroute(shoeid):
+    def model_view(shoeid):
+        print("-----------TESTE------------")
         #Query to fetch inventory info using shoeid
         InventoryInfo = fetchInfoFromInventory(shoeid)
         #Query to fetch Shoe info 
@@ -183,11 +187,28 @@ def create_app():
      #------------------------------------ This will be our future cart page --------------------------------------
     @app.route('/ecommerce/cart')
     def cart():
+        #call function fetch_user_cart
+        userId = session['id']
+        all_shoe_unit_features = []
+        user_cart_shoes = fetch_user_cart(userId)
+        #call fetchShoeInfo function with shoeId from all shoes in user_cart_shoes
+        #array with all information 
+        
+        print(user_cart_shoes)
+        for shoe in user_cart_shoes:
+            shoe_unit_features = fetchShoeInfo(shoe[1])
+            all_shoe_unit_features.append(shoe_unit_features)
+
+        print("Here is the info of all shoes")
+        print(all_shoe_unit_features)
+
         try:
             try:
                 return render_template("cart.html", 
                     username = session['firstName'], 
-                    user_id = session['id'])
+                    user_id = session['id'], 
+                    general_info = user_cart_shoes,
+                    unit_info = all_shoe_unit_features)
             except:
                 session["loggedin"] = False
                 return render_template("cart.html", 
@@ -218,6 +239,39 @@ def create_app():
     @app.route('/ContactUs')
     def contact():
         return render_template("aboutUs.html")
+    
+    def fetch_user_cart(userId):
+        #return stockId and and quantity from user cart
+        try:
+            cursor = mysql.connection.cursor()
+            cursor.execute('SET @element = % s' , (userId, ))
+            cursor.execute('SELECT * FROM CartItem WHERE UserID = @element')
+            cart_items = cursor.fetchall()
+        except Exception:
+            print(Exception)
+
+        return cart_items
+
+    @app.route('/add_to_cart')
+    def add_shoe_to_cart():
+        #add stockId and quantity to user cart
+
+        try:
+            cursor = mysql.connection.cursor()
+            cursor.execute('INSERT INTO CartItem VALUES(1, 10001, 1)')
+            mysql.connection.commit()
+        except Exception:
+            print(Exception)
+
+        return redirect(url_for('cart'))
+
+    def delete_shoe_from_cart():
+        #delete shoe based on userId and stockId
+        pass
+
+    def delete_all_shoes_from_cart():
+        #deletes all shoes from user cart based on userId
+        pass
 
     def fetchInfoFromInventory(shoeId):
         try:
