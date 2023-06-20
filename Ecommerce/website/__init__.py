@@ -4,6 +4,7 @@ from flask_mysqldb import MySQL
 from functools import wraps
 from os import path
 import re
+from itertools import zip_longest
 from website import auth_functions
 
 def create_app():
@@ -135,7 +136,6 @@ def create_app():
     def ecommerce():
         try:            
             if session['loggedin']:
-                print("Hello!!!!!!!!!")
                 shoeList = fetchAllShoes()
                 return render_template("ecommerce.html", username = session['firstName'], id = session['id'], sendList = shoeList)
             else:
@@ -187,30 +187,50 @@ def create_app():
      #------------------------------------ This will be our future cart page --------------------------------------
     @app.route('/ecommerce/cart')
     def cart():
-        #call function fetch_user_cart
-        userId = session['id']
+        #Get user ID from session
+        user_id = session['id']
+
+        #List to store a list of feature of each shoe in user cart
         all_shoe_unit_features = []
-        user_cart_shoes = fetch_user_cart(userId)
-        #call fetchShoeInfo function with shoeId from all shoes in user_cart_shoes
-        #array with all information 
-        
+        inventory_information = []
+
+        #Get all shoes from user's cart
+        user_cart_shoes = fetch_user_cart(user_id)
+        print("Here is all the cart shoes:")        
         print(user_cart_shoes)
+        
+        #For each shoe in user cart, get the unit info and store to the List -> all_show_unit_feature 
+        #First: get the shoeID based on the stockID then get the shoe info
+        #Second: get info from inventory
         for shoe in user_cart_shoes:
-            shoe_unit_features = fetchShoeInfo(shoe[1])
+            print(shoe[1])
+            shoeID = get_shoeID_by_stockID(shoe[1])
+            print('Iventory info:')
+            print(shoeID)
+            print('here')
+            shoe_unit_features = fetchShoeInfo(shoeID)
+            shoe_inventory_info = get_inventory_data_by_shoeID_and_stockID(shoe[1], shoeID)
+            print(shoe_unit_features)
+            print(shoe_inventory_info)
             all_shoe_unit_features.append(shoe_unit_features)
+            inventory_information.append(shoe_inventory_info)
+
 
         print("Here is the info of all shoes")
         print(all_shoe_unit_features)
+        print("Here is all the info from the inventory")
+        print(inventory_information)
+
+        zipped_data = zip_longest(inventory_information, all_shoe_unit_features, fillvalue='N/A')
+
 
         try:
             try:
                 return render_template("cart.html", 
-                    username = session['firstName'], 
-                    user_id = session['id'], 
-                    general_info = user_cart_shoes,
-                    unit_info = all_shoe_unit_features)
+                                       zipped_data = zipped_data)
             except:
                 session["loggedin"] = False
+                print('here')
                 return render_template("cart.html", 
                     username = "Store Guest",
                     user_id = -1)
@@ -258,8 +278,9 @@ def create_app():
 
         try:
             cursor = mysql.connection.cursor()
-            cursor.execute('INSERT INTO CartItem VALUES(1, 10001, 1)')
+            cursor.execute('INSERT INTO CartItem VALUES(1, 10002, 1)')
             mysql.connection.commit()
+            print('Item inserted to cart')
         except Exception:
             print(Exception)
 
@@ -271,6 +292,27 @@ def create_app():
 
     def delete_all_shoes_from_cart():
         #deletes all shoes from user cart based on userId
+        pass
+
+    def get_inventory_data_by_shoeID_and_stockID(stockID, shoeID):
+        try:
+            cursor = mysql.connection.cursor()
+            cursor.execute('SELECT * FROM Inventory WHERE StockID = %s AND ShoeID = %s', (stockID, shoeID))
+            ShoeID = cursor.fetchone()
+            return ShoeID
+        except Exception:
+            print(Exception)
+        pass
+
+    def get_shoeID_by_stockID(stockID):
+        try:
+            cursor = mysql.connection.cursor()
+            cursor.execute('SET @element = % s' , (stockID, ))
+            cursor.execute('SELECT ShoeID FROM Inventory WHERE StockID = @element')
+            ShoeID = cursor.fetchone()
+            return ShoeID
+        except Exception:
+            print(Exception)
         pass
 
     def fetchInfoFromInventory(shoeId):

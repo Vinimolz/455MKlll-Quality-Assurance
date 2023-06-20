@@ -130,7 +130,7 @@ header{
 .product{
     display: flex;
     width:500px;
-    height: 75px;    
+    height: 85px;    
 }
 .image{
     max-width: 100%;
@@ -173,7 +173,7 @@ img{
     margin-right: 200px;
 }
 .subtotal{
-    margin-left: 300px;
+    margin-left: 450px;
 }
 
 .total-price{

@@ -36,15 +36,17 @@
         <h3>Subtotal</h3>
     </div>
     <!-- Start For loop here-->
+    {% for inventory, shoe in zipped_data %}
     <section class="main-body">
         <div class="cart-content">
             <div class="product">
                 <div class="image">
-                    <img src="{{ url_for('static', filename='images/' unit_info[0][7]')}}" alt="">
+                    <img src="{{ url_for('static', filename='images/' + shoe[8])}}" alt="">
                 </div> 
                 <div class="text"> 
-                    <h5>The Charger</h5>
-                    <h6>US$: 56.99</h6>
+                    <h5>{{shoe[1]}}</h5>
+                    <h6>Size: {{inventory[2]}}</h6>
+                    <h6>US$: {{shoe[3]}}</h6>
                     <button><i class='bx bx-trash'></i></button>   
                 </div>      
             </div>
@@ -52,10 +54,13 @@
                 <input type="number" value="1" name="quantity"> 
             </div>
             <div class="subtotal">
-                <p>US$ 56.99</p>
+                <p>US$ {{shoe[3]}}</p>
             </div>            
         </div>
     </section>
+    {% endfor %}
+
+    <!-- This is not gonna be used beyond now
     <section class="main-body">
         <div class="cart-content">
             <div class="product">
@@ -96,6 +101,7 @@
             </div>            
         </div>
     </section>
+     -->
     <!-- End For loop here -->
     <div class="total-price">
         <table>
