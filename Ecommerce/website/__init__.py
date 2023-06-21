@@ -167,20 +167,24 @@ def create_app():
                 return render_template("ecommerce.html", username = session['firstName'], id = session['id'], sendList = searchShoeList)
 
      #--------------------------------------- Single Model view Page ----------------------------------------------
-    @app.route('/ecommerce/modelview/<int:shoeid>')
+    @app.route('/ecommerce/modelview/<int:shoeid>', methods=['GET', 'POST'])
     def model_view(shoeid):
-        print("-----------TESTE------------")
         #Query to fetch inventory info using shoeid
         InventoryInfo = fetchInfoFromInventory(shoeid)
         #Query to fetch Shoe info 
         ShoeInfo = fetchShoeInfo(shoeid)
-        for i in InventoryInfo:
-            print(i)
-        
-        print(ShoeInfo)
 
-        #Query to add shoe to cart db if user is loggedin or store in temporary data structure
-        #This will most likely use the shoeId
+        if request.method == 'POST':
+            size = request.form.get('size')
+            quantity = request.form.get('quantity')
+            
+            print(size)
+
+            add_shoe_to_cart(size, quantity, shoeid)
+
+            
+
+
 
         return render_template("modelview.html", inventory = InventoryInfo, shoe = ShoeInfo)
 
@@ -196,33 +200,21 @@ def create_app():
 
         #Get all shoes from user's cart
         user_cart_shoes = fetch_user_cart(user_id)
-        print("Here is all the cart shoes:")        
-        print(user_cart_shoes)
         
         #For each shoe in user cart, get the unit info and store to the List -> all_show_unit_feature 
         #First: get the shoeID based on the stockID then get the shoe info
         #Second: get info from inventory
         for shoe in user_cart_shoes:
-            print(shoe[1])
+
             shoeID = get_shoeID_by_stockID(shoe[1])
-            print('Iventory info:')
-            print(shoeID)
-            print('here')
+
             shoe_unit_features = fetchShoeInfo(shoeID)
             shoe_inventory_info = get_inventory_data_by_shoeID_and_stockID(shoe[1], shoeID)
-            print(shoe_unit_features)
-            print(shoe_inventory_info)
+
             all_shoe_unit_features.append(shoe_unit_features)
             inventory_information.append(shoe_inventory_info)
 
-
-        print("Here is the info of all shoes")
-        print(all_shoe_unit_features)
-        print("Here is all the info from the inventory")
-        print(inventory_information)
-
         zipped_data = zip_longest(inventory_information, all_shoe_unit_features, fillvalue='N/A')
-
 
         try:
             try:
@@ -272,20 +264,34 @@ def create_app():
 
         return cart_items
 
-    @app.route('/add_to_cart')
-    def add_shoe_to_cart():
-        #add stockId and quantity to user cart
+    def add_shoe_to_cart(size, quantity, shoe_id):
+        stock_id = fetch_inventoryID(shoe_id, size)
+        user_id = session['id']   
+
+        print(stock_id)     
 
         try:
-            cursor = mysql.connection.cursor()
-            cursor.execute('INSERT INTO CartItem VALUES(1, 10002, 1)')
-            mysql.connection.commit()
+            with mysql.connection.cursor() as cursor:
+                query = 'INSERT INTO CartItem (UserID, StockID, Quantity) VALUES (%s, %s, %s)'
+                cursor.execute(query, (user_id, stock_id, quantity))
+                mysql.connection.commit()
             print('Item inserted to cart')
-        except Exception:
-            print(Exception)
+        except Exception as e:
+            print(f"Error inserting item to cart: {str(e)}")
 
-        return redirect(url_for('cart'))
+    
+    def fetch_inventoryID(shoe_id, size):
+        try:
+            with mysql.connection.cursor() as cursor:
+                query = 'SELECT StockID FROM Inventory WHERE ShoeID = %s AND Size = %s'
+                cursor.execute(query, (shoe_id, size))
+                stock_id = cursor.fetchone()
+            return stock_id[0] if stock_id else None
+        except Exception as e:
+            print(f"Error fetching inventory ID: {str(e)}")
+            return None
 
+    
     def delete_shoe_from_cart():
         #delete shoe based on userId and stockId
         pass
