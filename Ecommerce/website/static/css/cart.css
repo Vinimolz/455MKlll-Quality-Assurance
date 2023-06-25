@@ -130,7 +130,7 @@ header{
 .product{
     display: flex;
     width:500px;
-    height: 85px;    
+    height: 90px;    
 }
 .image{
     max-width: 100%;

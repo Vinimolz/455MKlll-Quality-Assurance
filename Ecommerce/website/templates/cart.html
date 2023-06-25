@@ -47,7 +47,7 @@
                     <h5>{{shoe[1]}}</h5>
                     <h6>Size: {{inventory[2]}}</h6>
                     <h6>US$: {{shoe[3]}}</h6>
-                    <button><i class='bx bx-trash'></i></button>   
+                    <a href="delete_shoe/{{inventory[0]}}"><i class='bx bx-trash'></i></a>   
                 </div>      
             </div>
             <div class="quantity">
@@ -59,50 +59,6 @@
         </div>
     </section>
     {% endfor %}
-
-    <!-- This is not gonna be used beyond now
-    <section class="main-body">
-        <div class="cart-content">
-            <div class="product">
-                <div class="image">
-                    <img src="{{ url_for('static', filename='images/adidas.jpg')}}" alt="">
-                </div> 
-                <div class="text"> 
-                    <h5>Fast Girl</h5>
-                    <h6>US$: 74.99</h6>
-                    <button><i class='bx bx-trash'></i></button>   
-                </div>      
-            </div>
-            <div class="quantity">
-                <input type="number" value="1" name="quantity"> 
-            </div>
-            <div class="subtotal">
-                <p>US$ 74.99</p>
-            </div>            
-        </div>
-    </section>
-    <section class="main-body">
-        <div class="cart-content">
-            <div class="product">
-                <div class="image">
-                    <img src="{{ url_for('static', filename='images/nike1.jpg')}}" alt="">
-                </div> 
-                <div class="text"> 
-                    <h5>SuperSpeed 1000</h5>
-                    <h6>US$: 99.99</h6>
-                    <button><i class='bx bx-trash'></i></button>   
-                </div>      
-            </div>
-            <div class="quantity">
-                <input type="number" value="1" name="quantity"> 
-            </div>
-            <div class="subtotal">
-                <p>US$ 99.99</p>
-            </div>            
-        </div>
-    </section>
-     -->
-    <!-- End For loop here -->
     <div class="total-price">
         <table>
             <tr>
@@ -122,3 +78,22 @@
     <div class="checkout">
         <a class="viewBtn" href="/ecommerce/checkout">Checkout ></a>
     </div>
+
+
+    <script>
+        function deleteShoe(inventoryId, shoeId) {
+            // Make an AJAX request to your Flask route
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '/delete_shoe/' + inventoryId + '/' + shoeId);
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    // Handle the successful response, if needed
+                    console.log('Shoe deleted successfully.');
+                } else {
+                    // Handle the error response, if needed
+                    console.error('Error deleting the shoe.');
+                }
+            };
+            xhr.send();
+        }
+    </script>

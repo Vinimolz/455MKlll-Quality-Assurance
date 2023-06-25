@@ -175,16 +175,13 @@ def create_app():
         ShoeInfo = fetchShoeInfo(shoeid)
 
         if request.method == 'POST':
+            print('inside post request')
             size = request.form.get('size')
             quantity = request.form.get('quantity')
             
             print(size)
 
-            add_shoe_to_cart(size, quantity, shoeid)
-
-            
-
-
+            add_shoe_to_cart(size, quantity, shoeid) 
 
         return render_template("modelview.html", inventory = InventoryInfo, shoe = ShoeInfo)
 
@@ -218,8 +215,7 @@ def create_app():
 
         try:
             try:
-                return render_template("cart.html", 
-                                       zipped_data = zipped_data)
+                return render_template("cart.html", zipped_data = zipped_data)
             except:
                 session["loggedin"] = False
                 print('here')
@@ -276,10 +272,23 @@ def create_app():
                 cursor.execute(query, (user_id, stock_id, quantity))
                 mysql.connection.commit()
             print('Item inserted to cart')
+            return redirect(url_for('cart'))
         except Exception as e:
-            print(f"Error inserting item to cart: {str(e)}")
+            print(f"Error inserting item to cart: {str(e)}")   
 
-    
+    @app.route('/ecommerce/delete_shoe/<int:inventory_id>')
+    def delete_shoe_from_cart(inventory_id):
+        try:
+            user_id = session['id']
+            with mysql.connection.cursor() as cursor:
+                query = 'DELETE from CartItem WHERE StockID = %s AND UserID = %s'
+                cursor.execute(query, (inventory_id, user_id))
+                mysql.connection.commit()
+            print("Shoe deleted")
+            return redirect(url_for('cart'))
+        except Exception as e:
+            print(f'Error deleting shoe from cart: {str(e)}')
+
     def fetch_inventoryID(shoe_id, size):
         try:
             with mysql.connection.cursor() as cursor:
@@ -291,10 +300,6 @@ def create_app():
             print(f"Error fetching inventory ID: {str(e)}")
             return None
 
-    
-    def delete_shoe_from_cart():
-        #delete shoe based on userId and stockId
-        pass
 
     def delete_all_shoes_from_cart():
         #deletes all shoes from user cart based on userId
