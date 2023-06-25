@@ -36,7 +36,7 @@
         <h3>Subtotal</h3>
     </div>
     <!-- Start For loop here-->
-    {% for inventory, shoe in zipped_data %}
+    {% for inventory, shoe, cart_item, total in zipped_data %}
     <section class="main-body">
         <div class="cart-content">
             <div class="product">
@@ -44,17 +44,18 @@
                     <img src="{{ url_for('static', filename='images/' + shoe[8])}}" alt="">
                 </div> 
                 <div class="text"> 
-                    <h5>{{shoe[1]}}</h5>
-                    <h6>Size: {{inventory[2]}}</h6>
-                    <h6>US$: {{shoe[3]}}</h6>
+                    <h4>{{shoe[1]}}</h4>
+                    <h5>Size: {{inventory[2]}}</h5>
+                    <h5>US$: {{shoe[3]}}</h5>
                     <a href="delete_shoe/{{inventory[0]}}"><i class='bx bx-trash'></i></a>   
                 </div>      
             </div>
             <div class="quantity">
-                <input type="number" value="1" name="quantity"> 
+                <h4>{{cart_item[2]}}</h4> 
             </div>
             <div class="subtotal">
-                <p>US$ {{shoe[3]}}</p>
+                
+                <p>US$ {{ total[3] }}</p>
             </div>            
         </div>
     </section>

@@ -137,11 +137,12 @@ header{
     height: 75px;    
 }
 img{
-    height: 75px;
+    height: 100px;
+    border-radius: 10px;
 }
 .text{
     margin-left: 5px;
-    margin-top: 10px;
+    
 }
 .text button{
     color: transparent;
@@ -170,10 +171,11 @@ img{
 }
 .quantity{
     width: 25px;
-    margin-right: 200px;
+    margin-right: 75px;
+    margin-left: 125px;
 }
 .subtotal{
-    margin-left: 450px;
+    margin-left: 425px;
 }
 
 .total-price{

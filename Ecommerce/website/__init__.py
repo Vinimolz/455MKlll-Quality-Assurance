@@ -211,11 +211,18 @@ def create_app():
             all_shoe_unit_features.append(shoe_unit_features)
             inventory_information.append(shoe_inventory_info)
 
-        zipped_data = zip_longest(inventory_information, all_shoe_unit_features, fillvalue='N/A')
+        zipped_data = zip_longest(inventory_information, all_shoe_unit_features, user_cart_shoes, fillvalue='N/A')
+
+        data = []
+        for inventory, shoe, cart_item in zipped_data:
+            total = round(shoe[3] * cart_item[2], 2)
+            data.append((inventory, shoe, cart_item, total))
+
+        zipped_data_with_total = zip_longest(inventory_information, all_shoe_unit_features, user_cart_shoes, data, fillvalue='N/A')
 
         try:
             try:
-                return render_template("cart.html", zipped_data = zipped_data)
+                return render_template("cart.html", zipped_data = zipped_data_with_total)
             except:
                 session["loggedin"] = False
                 print('here')
@@ -264,7 +271,8 @@ def create_app():
         stock_id = fetch_inventoryID(shoe_id, size)
         user_id = session['id']   
 
-        print(stock_id)     
+        print(stock_id)
+        print(quantity)     
 
         try:
             with mysql.connection.cursor() as cursor:
