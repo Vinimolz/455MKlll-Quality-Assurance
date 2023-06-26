@@ -6,6 +6,8 @@ from os import path
 import re
 from itertools import zip_longest
 from website import auth_functions
+import MySQLdb
+from MySQLdb import IntegrityError
 
 def create_app():
     app = Flask(__name__)
@@ -175,15 +177,15 @@ def create_app():
         ShoeInfo = fetchShoeInfo(shoeid)
 
         if request.method == 'POST':
-            print('inside post request')
             size = request.form.get('size')
             quantity = request.form.get('quantity')
-            
-            print(size)
 
             add_shoe_to_cart(size, quantity, shoeid) 
 
-        return render_template("modelview.html", inventory = InventoryInfo, shoe = ShoeInfo)
+            return redirect(url_for('cart'))
+        
+        else:
+            return render_template("modelview.html", inventory = InventoryInfo, shoe = ShoeInfo)
 
      #------------------------------------ This will be our future cart page --------------------------------------
     @app.route('/ecommerce/cart')
@@ -214,21 +216,23 @@ def create_app():
         zipped_data = zip_longest(inventory_information, all_shoe_unit_features, user_cart_shoes, fillvalue='N/A')
 
         data = []
+        cart_subtotal = 0
         for inventory, shoe, cart_item in zipped_data:
             total = round(shoe[3] * cart_item[2], 2)
+            cart_subtotal += total
             data.append((inventory, shoe, cart_item, total))
 
         zipped_data_with_total = zip_longest(inventory_information, all_shoe_unit_features, user_cart_shoes, data, fillvalue='N/A')
 
+        cart_subtotal = round(cart_subtotal, 2)
+        cart_total = round(cart_subtotal + 2.99, 2)
+
         try:
             try:
-                return render_template("cart.html", zipped_data = zipped_data_with_total)
+                return render_template("cart.html", zipped_data = zipped_data_with_total, cart_subtotal=cart_subtotal, cart_total=cart_total)
             except:
                 session["loggedin"] = False
-                print('here')
-                return render_template("cart.html", 
-                    username = "Store Guest",
-                    user_id = -1)
+                return render_template("cart.html", username = "Store Guest", user_id = -1)
         except:
             flash("Something went wrong :'(", category='error')
             return redirect(url_for('ecommerce'))
@@ -262,27 +266,37 @@ def create_app():
             cursor.execute('SET @element = % s' , (userId, ))
             cursor.execute('SELECT * FROM CartItem WHERE UserID = @element')
             cart_items = cursor.fetchall()
-        except Exception:
-            print(Exception)
+        except Exception as e:
+            print(f'Error fetching user cart info: {str(e)}')
 
         return cart_items
 
     def add_shoe_to_cart(size, quantity, shoe_id):
         stock_id = fetch_inventoryID(shoe_id, size)
-        user_id = session['id']   
-
-        print(stock_id)
-        print(quantity)     
+        user_id = session['id']    
 
         try:
             with mysql.connection.cursor() as cursor:
                 query = 'INSERT INTO CartItem (UserID, StockID, Quantity) VALUES (%s, %s, %s)'
                 cursor.execute(query, (user_id, stock_id, quantity))
                 mysql.connection.commit()
-            print('Item inserted to cart')
-            return redirect(url_for('cart'))
+        except MySQLdb.IntegrityError as err:
+            if err.args[0] == 1062:
+                print('here')
+                update_cart_quantity(user_id, stock_id, quantity)
+            else:
+                print(f"Error inserting item to cart: {str(err)}")
+
+    def update_cart_quantity(user_id, stock_id, quantity):
+        try:
+            with mysql.connection.cursor() as cursor:
+                query = 'UPDATE Cartitem SET Quantity = Quantity + %s WHERE UserID = %s AND StockID = %s'
+                values = (quantity, user_id, stock_id)
+                cursor.execute(query, values)
+                mysql.connection.commit()
+                print('Quantity updated successfully')
         except Exception as e:
-            print(f"Error inserting item to cart: {str(e)}")   
+            print(f'Error updating cart quantity {str(e)}')   
 
     @app.route('/ecommerce/delete_shoe/<int:inventory_id>')
     def delete_shoe_from_cart(inventory_id):
@@ -292,7 +306,6 @@ def create_app():
                 query = 'DELETE from CartItem WHERE StockID = %s AND UserID = %s'
                 cursor.execute(query, (inventory_id, user_id))
                 mysql.connection.commit()
-            print("Shoe deleted")
             return redirect(url_for('cart'))
         except Exception as e:
             print(f'Error deleting shoe from cart: {str(e)}')
@@ -307,7 +320,6 @@ def create_app():
         except Exception as e:
             print(f"Error fetching inventory ID: {str(e)}")
             return None
-
 
     def delete_all_shoes_from_cart():
         #deletes all shoes from user cart based on userId

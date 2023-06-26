@@ -42,7 +42,7 @@
                     <hr>
                     <h4>Shoe Price: US$ {{shoe[3]}}</h4>
                     <form method="POST">
-                        <select name="size">
+                        Size: <select name="size">
                             {% for shoe in inventory %}
                               <option value="{{ shoe[2] }}">{{ shoe[2] }}</option>
                             {% endfor %}
