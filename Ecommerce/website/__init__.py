@@ -281,6 +281,10 @@ def create_app():
         except Exception as e:
             print(f'Error rendering checkoutpage: {str(e)}')
             return redirect(url_for('ecommerce'))
+        
+    @app.route('/order_confirmation')
+    def order_confirmation():
+        return render_template('order_confirmation.html')
 
     #-------------------------------- This will be our future profile page ----------------------------
     @app.route('/ecommerce/profile')
