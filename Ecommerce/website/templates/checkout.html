@@ -79,40 +79,25 @@
         <div class="summary">
             <h2>Purchase items:</h2>
             <!--For loop starts here-->
+            {% for inventory, shoe, cart_item, total in zipped_data %}
             <div class="summary-item">
                 <div class="summary-item-image">
-                    <img src="{{ url_for('static', filename='images/hokas.jpg')}}" alt="">
+                    <img src="{{ url_for('static', filename='images/' + shoe[8])}}" alt="">
                 </div>
                 <div class="summary-item-info">
-                    <h5>The Charger</h5>
-                    <h5>US$ 56.99</h5>
+                    <h5>{{ shoe[1] }}</h5>
+                    <h5>{{ shoe[3] }} x {{ cart_item[2] }}</h5>
                 </div>
             </div>
-            <div class="summary-item">
-                <div class="summary-item-image">
-                    <img src="{{ url_for('static', filename='images/adidas.jpg')}}" alt="">
-                </div>
-                <div class="summary-item-info">
-                    <h5>Fast Girl</h5>
-                    <h5>US$ 74.99</h5>
-                </div>
-            </div>
-            <div class="summary-item">
-                <div class="summary-item-image">
-                    <img src="{{ url_for('static', filename='images/nike1.jpg')}}" alt="">
-                </div>
-                <div class="summary-item-info">
-                    <h5>SuperSpeed 1000</h5>
-                    <h5>US$ 99.99</h5>
-                </div>
-            </div>
+            {% endfor %}
             <!--For loop ends here-->
+            
             <h2>Purchase Summary:</h2>
             <div class="order-summary">
                 <table>
                     <tr>
                         <td>items(3): </td>
-                        <td>$231.97</td>
+                        <td>{{cart_subtotal}}</td>
                     </tr>
                     <tr>
                         <td>Shipping: </td>
@@ -120,7 +105,7 @@
                     </tr>
                     <tr>
                         <td>Total Before tax: </td>
-                        <td>$234.96</td>
+                        <td>{{cart_total}}</td>
                     </tr>
                     <tr>
                         <td>Tax & Fees: </td>
@@ -132,7 +117,7 @@
                 <table>
                     <tr>
                         <td>Order total:</td>
-                        <td>$258.84</td>
+                        <td>{{ order_total }}</td>
                     </tr>
                 </table>                
             </div>

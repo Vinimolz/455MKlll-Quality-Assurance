@@ -239,7 +239,48 @@ def create_app():
 
     @app.route('/ecommerce/checkout')
     def checkout():
-        return render_template("checkout.html")
+        #Get user ID from session
+        user_id = session['id']
+
+        #List to store a list of feature of each shoe in user cart
+        all_shoe_unit_features = []
+        inventory_information = []
+
+        #Get all shoes from user's cart
+        user_cart_shoes = fetch_user_cart(user_id)
+        #For each shoe in user cart, get the unit info and store to the List -> all_show_unit_feature 
+        #First: get the shoeID based on the stockID then get the shoe info
+        #Second: get info from inventory
+        for shoe in user_cart_shoes:
+
+            shoeID = get_shoeID_by_stockID(shoe[1])
+
+            shoe_unit_features = fetchShoeInfo(shoeID)
+            shoe_inventory_info = get_inventory_data_by_shoeID_and_stockID(shoe[1], shoeID)
+
+            all_shoe_unit_features.append(shoe_unit_features)
+            inventory_information.append(shoe_inventory_info)
+
+        zipped_data = zip_longest(inventory_information, all_shoe_unit_features, user_cart_shoes, fillvalue='N/A')
+
+        data = []
+        cart_subtotal = 0
+        for inventory, shoe, cart_item in zipped_data:
+            total = round(shoe[3] * cart_item[2], 2)
+            cart_subtotal += total
+            data.append((inventory, shoe, cart_item, total))
+
+        zipped_data_with_total = zip_longest(inventory_information, all_shoe_unit_features, user_cart_shoes, data, fillvalue='N/A')
+
+        cart_subtotal = round(cart_subtotal, 2)
+        cart_total = round(cart_subtotal + 2.99, 2)
+
+        order_total = round(cart_total + 23.88, 2)
+        try:
+            return render_template("checkout.html", zipped_data = zipped_data_with_total, cart_subtotal=cart_subtotal, cart_total=cart_total, order_total=order_total)
+        except Exception as e:
+            print(f'Error rendering checkoutpage: {str(e)}')
+            return redirect(url_for('ecommerce'))
 
     #-------------------------------- This will be our future profile page ----------------------------
     @app.route('/ecommerce/profile')
